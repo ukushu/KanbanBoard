@@ -1,8 +1,11 @@
+
 import Foundation
 import Essentials
 import SwiftUI
 
 struct KBCard: Codable {
+    var users: [KBUser]
+    
     var color: Color
     var issueName: String
     var issueURL: URL?

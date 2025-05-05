@@ -1,5 +1,5 @@
 
-struct KBUser {
+struct KBUser: Codable {
     //let avatar: Getting from GRavatar
     var email: String
     var name: String
