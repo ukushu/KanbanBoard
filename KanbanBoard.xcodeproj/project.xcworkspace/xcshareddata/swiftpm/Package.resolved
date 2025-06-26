@@ -1,5 +1,5 @@
 {
-  "originHash" : "c87d454285350966af24cc056c5f18304c5d4daad5f4437b702533bcbd2c1895",
+  "originHash" : "509cd4c3579d6a4e712d3a69e3b493460973dc0adf875d4ef551ab6f5ef1c2bd",
   "pins" : [
     {
       "identity" : "essentials",
@@ -7,7 +7,16 @@
       "location" : "https://gitlab.com/sergiy.vynnychenko/essentials.git",
       "state" : {
         "branch" : "master",
-        "revision" : "b2dca562e79817d8a427a9f3a71127e0748e1bd0"
+        "revision" : "7acea6957f97334fc12753ef40661a03183e1875"
+      }
+    },
+    {
+      "identity" : "moreswiftui",
+      "kind" : "remoteSourceControl",
+      "location" : "git@gitlab.com:UKS/moreswiftui.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "5364e2c26ca73a3c7a7aeef2db04b8bf8fe4de21"
       }
     }
   ],

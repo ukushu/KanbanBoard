@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1DB8ED242E0DBE7E006561BD /* MoreSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1DB8ED232E0DBE7E006561BD /* MoreSwiftUI */; };
 		1DEB7A012DC96783006B6059 /* Essentials in Frameworks */ = {isa = PBXBuildFile; productRef = 1DEB7A002DC96783006B6059 /* Essentials */; };
 		1DEB7A022DC96B1B006B6059 /* Essentials in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1DEB7A002DC96783006B6059 /* Essentials */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DEB7A012DC96783006B6059 /* Essentials in Frameworks */,
+				1DB8ED242E0DBE7E006561BD /* MoreSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +89,7 @@
 			name = KanbanBoard;
 			packageProductDependencies = (
 				1DEB7A002DC96783006B6059 /* Essentials */,
+				1DB8ED232E0DBE7E006561BD /* MoreSwiftUI */,
 			);
 			productName = KanbanBoard;
 			productReference = 1DEB79E02DC96513006B6059 /* KanbanBoard.app */;
@@ -118,6 +121,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				1DEB79FF2DC96783006B6059 /* XCRemoteSwiftPackageReference "essentials" */,
+				1DB8ED222E0DBE7E006561BD /* XCRemoteSwiftPackageReference "moreswiftui" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1DEB79E12DC96513006B6059 /* Products */;
@@ -346,6 +350,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1DB8ED222E0DBE7E006561BD /* XCRemoteSwiftPackageReference "moreswiftui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@gitlab.com:UKS/moreswiftui.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		1DEB79FF2DC96783006B6059 /* XCRemoteSwiftPackageReference "essentials" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://gitlab.com/sergiy.vynnychenko/essentials.git";
@@ -357,6 +369,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1DB8ED232E0DBE7E006561BD /* MoreSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1DB8ED222E0DBE7E006561BD /* XCRemoteSwiftPackageReference "moreswiftui" */;
+			productName = MoreSwiftUI;
+		};
 		1DEB7A002DC96783006B6059 /* Essentials */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1DEB79FF2DC96783006B6059 /* XCRemoteSwiftPackageReference "essentials" */;

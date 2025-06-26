@@ -1,2 +1,4 @@
 
-
+struct KBCardID: Hashable {
+    
+}
