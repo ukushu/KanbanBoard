@@ -8,6 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		1DB8ED242E0DBE7E006561BD /* MoreSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1DB8ED232E0DBE7E006561BD /* MoreSwiftUI */; };
+		1DB8ED3A2E10355F006561BD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DB8ED312E10355F006561BD /* Preview Assets.xcassets */; };
+		1DB8ED3B2E10355F006561BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DB8ED352E10355F006561BD /* Assets.xcassets */; };
+		1DB8ED3C2E10355F006561BD /* KBCardID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED262E10355F006561BD /* KBCardID.swift */; };
+		1DB8ED3D2E10355F006561BD /* KBoardID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED272E10355F006561BD /* KBoardID.swift */; };
+		1DB8ED3E2E10355F006561BD /* KBUserID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED282E10355F006561BD /* KBUserID.swift */; };
+		1DB8ED3F2E10355F006561BD /* KBCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED2B2E10355F006561BD /* KBCard.swift */; };
+		1DB8ED402E10355F006561BD /* KBCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED2C2E10355F006561BD /* KBCell.swift */; };
+		1DB8ED412E10355F006561BD /* KBLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED2D2E10355F006561BD /* KBLine.swift */; };
+		1DB8ED422E10355F006561BD /* KBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED2E2E10355F006561BD /* KBoard.swift */; };
+		1DB8ED432E10355F006561BD /* KBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED2F2E10355F006561BD /* KBUser.swift */; };
+		1DB8ED442E10355F006561BD /* KBCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED332E10355F006561BD /* KBCardView.swift */; };
+		1DB8ED452E10355F006561BD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED362E10355F006561BD /* ContentView.swift */; };
+		1DB8ED462E10355F006561BD /* KanbanBoardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED382E10355F006561BD /* KanbanBoardApp.swift */; };
+		1DB8ED492E10356E006561BD /* KBoardID.storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED482E10356C006561BD /* KBoardID.storage.swift */; };
+		1DB8ED4B2E1035C9006561BD /* ProjID.storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED4A2E1035C4006561BD /* ProjID.storage.swift */; };
+		1DB8ED4E2E103601006561BD /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 1DB8ED4D2E103601006561BD /* OrderedCollections */; };
 		1DEB7A012DC96783006B6059 /* Essentials in Frameworks */ = {isa = PBXBuildFile; productRef = 1DEB7A002DC96783006B6059 /* Essentials */; };
 		1DEB7A022DC96B1B006B6059 /* Essentials in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 1DEB7A002DC96783006B6059 /* Essentials */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -27,16 +43,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1DB8ED262E10355F006561BD /* KBCardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBCardID.swift; sourceTree = "<group>"; };
+		1DB8ED272E10355F006561BD /* KBoardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBoardID.swift; sourceTree = "<group>"; };
+		1DB8ED282E10355F006561BD /* KBUserID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBUserID.swift; sourceTree = "<group>"; };
+		1DB8ED2B2E10355F006561BD /* KBCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBCard.swift; sourceTree = "<group>"; };
+		1DB8ED2C2E10355F006561BD /* KBCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBCell.swift; sourceTree = "<group>"; };
+		1DB8ED2D2E10355F006561BD /* KBLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBLine.swift; sourceTree = "<group>"; };
+		1DB8ED2E2E10355F006561BD /* KBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBoard.swift; sourceTree = "<group>"; };
+		1DB8ED2F2E10355F006561BD /* KBUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBUser.swift; sourceTree = "<group>"; };
+		1DB8ED312E10355F006561BD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1DB8ED332E10355F006561BD /* KBCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBCardView.swift; sourceTree = "<group>"; };
+		1DB8ED352E10355F006561BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1DB8ED362E10355F006561BD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1DB8ED372E10355F006561BD /* KanbanBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KanbanBoard.entitlements; sourceTree = "<group>"; };
+		1DB8ED382E10355F006561BD /* KanbanBoardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanbanBoardApp.swift; sourceTree = "<group>"; };
+		1DB8ED482E10356C006561BD /* KBoardID.storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBoardID.storage.swift; sourceTree = "<group>"; };
+		1DB8ED4A2E1035C4006561BD /* ProjID.storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjID.storage.swift; sourceTree = "<group>"; };
 		1DEB79E02DC96513006B6059 /* KanbanBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KanbanBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		1DEB79E22DC96513006B6059 /* KanbanBoard */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = KanbanBoard;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1DEB79DD2DC96513006B6059 /* Frameworks */ = {
@@ -45,16 +69,88 @@
 			files = (
 				1DEB7A012DC96783006B6059 /* Essentials in Frameworks */,
 				1DB8ED242E0DBE7E006561BD /* MoreSwiftUI in Frameworks */,
+				1DB8ED4E2E103601006561BD /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1DB8ED292E10355F006561BD /* IDs */ = {
+			isa = PBXGroup;
+			children = (
+				1DB8ED472E103566006561BD /* Storage */,
+				1DB8ED272E10355F006561BD /* KBoardID.swift */,
+				1DB8ED262E10355F006561BD /* KBCardID.swift */,
+				1DB8ED282E10355F006561BD /* KBUserID.swift */,
+			);
+			path = IDs;
+			sourceTree = "<group>";
+		};
+		1DB8ED2A2E10355F006561BD /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		1DB8ED302E10355F006561BD /* KanbanBoardModel */ = {
+			isa = PBXGroup;
+			children = (
+				1DB8ED292E10355F006561BD /* IDs */,
+				1DB8ED2A2E10355F006561BD /* Storage */,
+				1DB8ED2B2E10355F006561BD /* KBCard.swift */,
+				1DB8ED2C2E10355F006561BD /* KBCell.swift */,
+				1DB8ED2D2E10355F006561BD /* KBLine.swift */,
+				1DB8ED2E2E10355F006561BD /* KBoard.swift */,
+				1DB8ED2F2E10355F006561BD /* KBUser.swift */,
+			);
+			path = KanbanBoardModel;
+			sourceTree = "<group>";
+		};
+		1DB8ED322E10355F006561BD /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				1DB8ED312E10355F006561BD /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1DB8ED342E10355F006561BD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1DB8ED332E10355F006561BD /* KBCardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		1DB8ED392E10355F006561BD /* KanbanBoard */ = {
+			isa = PBXGroup;
+			children = (
+				1DB8ED302E10355F006561BD /* KanbanBoardModel */,
+				1DB8ED322E10355F006561BD /* Preview Content */,
+				1DB8ED342E10355F006561BD /* Views */,
+				1DB8ED352E10355F006561BD /* Assets.xcassets */,
+				1DB8ED362E10355F006561BD /* ContentView.swift */,
+				1DB8ED372E10355F006561BD /* KanbanBoard.entitlements */,
+				1DB8ED382E10355F006561BD /* KanbanBoardApp.swift */,
+			);
+			path = KanbanBoard;
+			sourceTree = "<group>";
+		};
+		1DB8ED472E103566006561BD /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				1DB8ED482E10356C006561BD /* KBoardID.storage.swift */,
+				1DB8ED4A2E1035C4006561BD /* ProjID.storage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		1DEB79D72DC96513006B6059 = {
 			isa = PBXGroup;
 			children = (
-				1DEB79E22DC96513006B6059 /* KanbanBoard */,
+				1DB8ED392E10355F006561BD /* KanbanBoard */,
 				1DEB79E12DC96513006B6059 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,13 +179,11 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				1DEB79E22DC96513006B6059 /* KanbanBoard */,
-			);
 			name = KanbanBoard;
 			packageProductDependencies = (
 				1DEB7A002DC96783006B6059 /* Essentials */,
 				1DB8ED232E0DBE7E006561BD /* MoreSwiftUI */,
+				1DB8ED4D2E103601006561BD /* OrderedCollections */,
 			);
 			productName = KanbanBoard;
 			productReference = 1DEB79E02DC96513006B6059 /* KanbanBoard.app */;
@@ -122,6 +216,7 @@
 			packageReferences = (
 				1DEB79FF2DC96783006B6059 /* XCRemoteSwiftPackageReference "essentials" */,
 				1DB8ED222E0DBE7E006561BD /* XCRemoteSwiftPackageReference "moreswiftui" */,
+				1DB8ED4C2E103601006561BD /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1DEB79E12DC96513006B6059 /* Products */;
@@ -138,6 +233,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DB8ED3A2E10355F006561BD /* Preview Assets.xcassets in Resources */,
+				1DB8ED3B2E10355F006561BD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +245,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DB8ED3C2E10355F006561BD /* KBCardID.swift in Sources */,
+				1DB8ED3D2E10355F006561BD /* KBoardID.swift in Sources */,
+				1DB8ED3E2E10355F006561BD /* KBUserID.swift in Sources */,
+				1DB8ED3F2E10355F006561BD /* KBCard.swift in Sources */,
+				1DB8ED402E10355F006561BD /* KBCell.swift in Sources */,
+				1DB8ED412E10355F006561BD /* KBLine.swift in Sources */,
+				1DB8ED492E10356E006561BD /* KBoardID.storage.swift in Sources */,
+				1DB8ED422E10355F006561BD /* KBoard.swift in Sources */,
+				1DB8ED432E10355F006561BD /* KBUser.swift in Sources */,
+				1DB8ED442E10355F006561BD /* KBCardView.swift in Sources */,
+				1DB8ED452E10355F006561BD /* ContentView.swift in Sources */,
+				1DB8ED4B2E1035C9006561BD /* ProjID.storage.swift in Sources */,
+				1DB8ED462E10355F006561BD /* KanbanBoardApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +468,14 @@
 				kind = branch;
 			};
 		};
+		1DB8ED4C2E103601006561BD /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
 		1DEB79FF2DC96783006B6059 /* XCRemoteSwiftPackageReference "essentials" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://gitlab.com/sergiy.vynnychenko/essentials.git";
@@ -373,6 +491,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1DB8ED222E0DBE7E006561BD /* XCRemoteSwiftPackageReference "moreswiftui" */;
 			productName = MoreSwiftUI;
+		};
+		1DB8ED4D2E103601006561BD /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1DB8ED4C2E103601006561BD /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
 		};
 		1DEB7A002DC96783006B6059 /* Essentials */ = {
 			isa = XCSwiftPackageProductDependency;
