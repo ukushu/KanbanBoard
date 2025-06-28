@@ -1,1 +1,4 @@
 
+struct KBUserID: Hashable {
+    
+}

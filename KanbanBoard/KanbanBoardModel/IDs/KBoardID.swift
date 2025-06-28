@@ -1,2 +1,4 @@
 
-
+struct KBoardID: Hashable {
+    
+}
