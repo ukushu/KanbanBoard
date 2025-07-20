@@ -16,7 +16,7 @@ struct KBoardView: View {
             HStack {
                 Spacer()
                 
-                Text("Cols: \(model .columns.count); Cells in col: \(model.board.cells.count / max(model.columns.count, 1) )")
+                Text("Cols: \(model.columns.count); Cells in col: \(model.board.cells.count / max(model.columns.count, 1) )")
                 
                 Button("+ row") {
                     model.insert(row: "hello1")

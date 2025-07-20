@@ -4,11 +4,11 @@ import Essentials
 
 struct MainView: View {
     let projID: ProjID
-//    @ObservedObject var model : Flow.Document<KBoard>
+    @ObservedObject var model : Flow.Document<KBoard>
     
     init(projID: ProjID) {
         self.projID = projID
-//        self.model = projID.boardsDocument.content.values.first!.document
+        self.model = projID.boardsDocument.content.values.first!.document
     }
     
     @State private var fieldFrame: CGRect = .zero

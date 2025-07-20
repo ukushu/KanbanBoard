@@ -12,15 +12,11 @@ class KBoardVM: ObservableObject {
     let boardID: KBoardID
     var board: KBoard { boardID.document.content }
     
-    @Published var columns: [GridItem] = [ ]
+    @Published var columns: [GridItem]
     
     init(boardID: KBoardID) {
         self.boardID = boardID
-//        
-//        self.board = boardID.document.content
-//        self.board.cells = Array( 0..<(board.columns.count * board.rows.count) ).map{ _ in KBCell(cards: []) }
-//        self.columns = board.columns.map{ _ in GridItem(.flexible()) }
-        print("")
+        self.columns = boardID.document.content.columns.map{ _ in GridItem(.flexible()) }
     }
     
     func insert(row: String) {
@@ -29,6 +25,8 @@ class KBoardVM: ObservableObject {
         let newRow = Array(0..<board.columns.count).map { _ in KBCell(cards: [], color: .yellow) }
         
         boardID.document.content.cells.append(contentsOf: newRow)
+        
+        self.columns = boardID.document.content.columns.map{ _ in GridItem(.flexible()) }
     }
     
     func insert(column: String) {
