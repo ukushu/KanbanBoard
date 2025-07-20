@@ -4,7 +4,7 @@ import SwiftUI
 
 let cellSize: CGSize = CGSize(width: 100, height: 100)
 
-struct KBCell {
+struct KBCell: Codable {
     var id: UUID = UUID()
     
     var maxItems: Int = 4

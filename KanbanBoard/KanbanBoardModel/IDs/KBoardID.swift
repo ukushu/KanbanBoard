@@ -1,7 +1,7 @@
 import Foundation
 import Essentials
 
-struct KBoardID : Hashable, Identifiable {
+struct KBoardID : Hashable, Identifiable, Codable {
     public let projID: Flow.ProjectID
     private(set) var id : UUID
     

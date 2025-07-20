@@ -1,11 +1,31 @@
 
 import SwiftUI
+import Essentials
 
 struct ContentView: View {
-    @ObservedObject var model = KBoardVM()
+    let projID: ProjID
+    @ObservedObject var model : Flow.Document<KBoard>
+    
+    init(projID: ProjID) {
+        self.projID = projID
+        self.model = projID.boardsDocument.content.values.first!.document
+    }
+    
+    var body: some View {
+        KBoardView(projID: projID)
+    }
+}
+
+struct KBoardView: View {
+    let projID: ProjID
+    @ObservedObject var model : KBoardVM
+    
+    init(projID: ProjID) {
+        self.projID = projID
+        model = projID.boardsDocument.content.values.first!.viewModel
+    }
     
     @State private var fieldFrame: CGRect = .zero
-    
     let card = KBCard(
         users: [KBUser(email: "gmail.com", name: "Куся", responsibility: "dev")],
             issueName: "Фікс бага",
@@ -21,7 +41,7 @@ struct ContentView: View {
             HStack {
                 Spacer()
                 
-                Text("Cols: \(model.columns.count); Cells in col: \(model.board.cells.count)")
+                Text("Cols: \(model .columns.count); Cells in col: \(model.board.cells.count / max(model.columns.count, 1) )")
                 
                 Button("+ row") {
                     model.insert(row: "hello1")
@@ -42,7 +62,6 @@ struct ContentView: View {
                     }
                     
                     ForEach(Array(model.board.cells.enumerated()), id: \.element) { idx, cell in
-                        
                         cell.asView()
                     }
                 }
@@ -54,6 +73,7 @@ struct ContentView: View {
     }
 }
 
+
 #Preview {
-    ContentView()
+    ContentView(projID: .sampleProject)
 }

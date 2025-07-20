@@ -8,9 +8,9 @@ typealias ProjID = Flow.ProjectID
 typealias OrderDict = OrderedDictionary
 
 extension Flow.ProjectID {
-    var mapListDocument : Flow.Document<OrderDict<UUID,String>> {
+    var boardsDocument : Flow.Document<OrderDict<UUID,KBoardID>> {
         storage.lazyInit { projID, pool in
-            Flow.Document(jsonURL: projID.kboardUsersListUrl, defaultContent: [UUID():"my map"], errors: pool)
+            Flow.Document(jsonURL: projID.kboardUsersListUrl, defaultContent: [UUID(): KBoardID(projID: projID) ], errors: pool)
         }
     }
     
@@ -22,6 +22,12 @@ extension Flow.ProjectID {
 }
 
 extension Flow.ProjectID {
-    static var sampleProject : Flow.ProjectID { Flow.ProjectID(url: URL.userHome.appendingPathComponent("SampleKanbanBoardProj")) }
-           var kboardUsersListUrl   : URL    { self.url.appendingPathComponent("KanbanBoardUsersList.txt") }
+    static var sampleProject : Flow.ProjectID {
+        let a = URL.userHome.appendingPathComponent("SampleKanbanBoardProj")
+        _ = a.makeSureDirExist()
+        return Flow.ProjectID(url: a)
+    }
+    
+    var kboardUsersListUrl   : URL    { self.url.appendingPathComponent("KanbanBoardUsersList.txt") }
+    var kBoardUrl: URL                { self.url.appendingPathComponent("kBoard.txt") }
 }
