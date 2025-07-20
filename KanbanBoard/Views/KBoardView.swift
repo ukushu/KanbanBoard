@@ -2,20 +2,6 @@
 import SwiftUI
 import Essentials
 
-struct ContentView: View {
-    let projID: ProjID
-    @ObservedObject var model : Flow.Document<KBoard>
-    
-    init(projID: ProjID) {
-        self.projID = projID
-        self.model = projID.boardsDocument.content.values.first!.document
-    }
-    
-    var body: some View {
-        KBoardView(projID: projID)
-    }
-}
-
 struct KBoardView: View {
     let projID: ProjID
     @ObservedObject var model : KBoardVM
@@ -34,7 +20,6 @@ struct KBoardView: View {
             dateEnd: Date().addingTimeInterval(86400),
             tags: "bug,urgent"
         )
-    
     
     var body: some View {
         VStack {
@@ -73,7 +58,6 @@ struct KBoardView: View {
     }
 }
 
-
 #Preview {
-    ContentView(projID: .sampleProject)
+    KBoardView(projID: .sampleProject)
 }

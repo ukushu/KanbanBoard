@@ -1,9 +1,3 @@
-//
-//  KanbanBoardApp.swift
-//  KanbanBoard
-//
-//  Created by UKS on 06.05.2025.
-//
 
 import SwiftUI
 
@@ -11,7 +5,7 @@ import SwiftUI
 struct KanbanBoardApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView(projID: .sampleProject)
+            MainView(projID: .sampleProject)
         }
     }
 }
