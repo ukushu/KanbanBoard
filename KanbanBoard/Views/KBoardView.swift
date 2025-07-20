@@ -11,16 +11,6 @@ struct KBoardView: View {
         model = projID.boardsDocument.content.values.first!.viewModel
     }
     
-    @State private var fieldFrame: CGRect = .zero
-    let card = KBCard(
-        users: [KBUser(email: "gmail.com", name: "Куся", responsibility: "dev")],
-            issueName: "Фікс бага",
-            issueURL: URL(string: "https://example.com"),
-            dateCreation: Date(),
-            dateEnd: Date().addingTimeInterval(86400),
-            tags: "bug,urgent"
-        )
-    
     var body: some View {
         VStack {
             HStack {
@@ -52,7 +42,6 @@ struct KBoardView: View {
                 }
             }
             
-            KBCardDraggableView(card: card, fieldFrame: fieldFrame)
         }
         .padding()
     }
