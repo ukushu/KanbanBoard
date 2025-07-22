@@ -20,6 +20,10 @@ class KBoardVM: ObservableObject {
     }
     
     func insert(row: String) {
+        if gridIsEmpty {
+            insert(column: "new col")
+        }
+        
         boardID.document.content.rows.append(row)
         
         let newRow = Array(0..<board.columns.count).map { _ in KBCell(cards: [], color: .yellow) }
@@ -40,5 +44,11 @@ class KBoardVM: ObservableObject {
         }
         
         boardID.document.content.cells = cellsNew.flatMap { $0 }
+        
+    }
+    
+    var gridIsEmpty: Bool {
+        boardID.document.content.columns.count == 0
+        && boardID.document.content.cells.count == 0
     }
 }
