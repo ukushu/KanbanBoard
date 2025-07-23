@@ -8,6 +8,13 @@ struct KBoard: Codable {
     var cells: [KBCell] = []
 }
 
+class KBoardDropTargets {
+    static var shared: KBoardDropTargets = KBoardDropTargets()
+    var targets: [UUID: CGRect] = [:]
+    
+    private init() {}
+}
+
 class KBoardVM: ObservableObject {
     let boardID: KBoardID
     var board: KBoard { boardID.document.content }
@@ -44,7 +51,6 @@ class KBoardVM: ObservableObject {
         }
         
         boardID.document.content.cells = cellsNew.flatMap { $0 }
-        
     }
     
     var gridIsEmpty: Bool {

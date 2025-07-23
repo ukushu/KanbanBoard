@@ -32,23 +32,35 @@ struct KBCellView: View {
     let cell: KBCell
     
     var body: some View {
-        VStack {
-            Spacer(minLength: 5)
+        GeometryReader { geo in
+            VStack {
+                Spacer(minLength: 5)
+            }
+            .frame(width: cellSize.width, height: cellSize.height)
+            .onAppear {
+                if KBoardDropTargets.shared.targets[cell.id] != geo.frame(in: .global) {
+                    KBoardDropTargets.shared.targets[cell.id] = geo.frame(in: .global)
+                }
+            }
+            .background {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Text("\(cell.maxItems)")
+                            .padding(5)
+                    }
+                    
+                    Spacer()
+                }
+            }
+            .background(cell.color.opacity(0.8) )
         }
         .frame(width: cellSize.width, height: cellSize.height)
-        .background {
-            VStack {
-                HStack {
-                    Spacer()
-                    Text("\(cell.maxItems)")
-                        .padding(5)
-                }
-                
-                Spacer()
-            }
-        }
-        .background(cell.color)
         .cornerRadius(10)
         .shadow(radius: 2)
+        .id(cell.id)
+        
     }
 }
+
+

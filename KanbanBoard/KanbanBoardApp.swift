@@ -5,7 +5,7 @@ import SwiftUI
 struct KanbanBoardApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView(projID: .sampleProject)
+            MainView(kBoardID: ProjID.sampleProject.boardsDocument.content.values.first! )
         }
     }
 }

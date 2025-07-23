@@ -3,12 +3,14 @@ import SwiftUI
 import Essentials
 
 struct MainView: View {
-    let projID: ProjID
+    let kBoardID: KBoardID
     @ObservedObject var model : Flow.Document<KBoard>
     
-    init(projID: ProjID) {
-        self.projID = projID
-        self.model = projID.boardsDocument.content.values.first!.document
+    @GestureState private var dragLocation = CGPoint.zero
+    
+    init(kBoardID: KBoardID) {
+        self.kBoardID = kBoardID
+        self.model = kBoardID.projID.boardsDocument.content.values.first!.document
     }
     
     @State private var fieldFrame: CGRect = .zero
@@ -24,9 +26,10 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            KBoardView(projID: projID)
+            KBoardView(projID: kBoardID.projID)
+                .coordinateSpace(name: "globalArea")
             
-            KBCardDraggableView(card: card, fieldFrame: fieldFrame)
+            KBCardDraggableView(kBoardID: kBoardID, card: card, fieldFrame: fieldFrame, dragLocation: $dragLocation)
         }
     }
 }

@@ -1,36 +1,71 @@
 import SwiftUI
 
 struct KBCardDraggableView: View {
+    let kBoardID: KBoardID
+    
     let card: KBCard
     let fieldFrame: CGRect
     
     @State private var offset: CGSize = .zero
-    @GestureState private var dragOffset: CGSize = .zero
+    var dragLocation: GestureState<CGPoint>
+    @GestureState var isDragging = false
     
     var body: some View {
         KBCardView(card: card)
-            .offset(offset + dragOffset)
+            .opacity(isDragging ? 0.8 : 1)
+            .offset(offset + dragLocation.wrappedValue.asCGSize())
             .gesture(
                 DragGesture()
-                    .updating($dragOffset) { value, state, _ in
-                        state = value.translation
+                    .updating($isDragging) { _, state, _ in
+                        state = true
+                    }
+                    .updating(dragLocation) { value, state, _ in
+                        let loc = value.location
+//                        let globalLoc: CGPoint = value.location(in: CoordinateSpace.named("globalArea"))
+                        state = loc
                     }
                     .onEnded { value in
                         let finalPosition = offset + value.translation
-                        let cardSize = CGSize(width: 150, height: 150) // approximate
-                        let cardFrame = CGRect(origin: CGPoint(x: finalPosition.width,
-                                                               y: finalPosition.height),
-                                               size: cardSize)
+//                        let cardSize = CGSize(width: 150, height: 150)
+//                        let cardFrame = CGRect(origin: CGPoint(x: finalPosition.width,
+//                                                               y: finalPosition.height),
+//                                               size: cardSize)
                         
-                        // Примагнічування, якщо перетинається з FieldView
-                        if fieldFrame.intersects(cardFrame) {
-                            // Snap to top-left corner of FieldView
-                            offset = CGSize(width: fieldFrame.origin.x, height: fieldFrame.origin.y)
+                        let cardFrame = CGRect(origin: dragLocation.wrappedValue, size: CGSize(width: 10, height: 10))
+                        
+                        let tmp = KBoardDropTargets.shared.targets
+                        
+                        if let matched = KBoardDropTargets.shared.targets.first(where: { $0.value.intersects(cardFrame) })
+                        {
+                            offset = CGSize(width: matched.value.origin.x, height: matched.value.origin.y)
+                            
                         } else {
                             offset = finalPosition
                         }
                     }
             )
+            .coordinateSpace(name: "globalArea")
+//            .gesture(
+//                DragGesture()
+//                    .updating($dragOffset) { value, state, _ in
+//                        state = value.translation
+//                    }
+//                    .onEnded { value in
+//                        let finalPosition = offset + value.translation
+//                        let cardSize = CGSize(width: 150, height: 150) // approximate
+//                        let cardFrame = CGRect(origin: CGPoint(x: finalPosition.width,
+//                                                               y: finalPosition.height),
+//                                               size: cardSize)
+//                        
+//                        // Примагнічування, якщо перетинається з FieldView
+//                        if fieldFrame.intersects(cardFrame) {
+//                            // Snap to top-left corner of FieldView
+//                            offset = CGSize(width: fieldFrame.origin.x, height: fieldFrame.origin.y)
+//                        } else {
+//                            offset = finalPosition
+//                        }
+//                    }
+//            )
     }
 }
 
@@ -145,9 +180,14 @@ struct Tooltip: View {
     }
 }
 
-
 extension CGSize {
     static func + (lhs: CGSize, rhs: CGSize) -> CGSize {
         CGSize(width: lhs.width + rhs.width, height: lhs.height + rhs.height)
+    }
+}
+
+extension CGPoint {
+    func asCGSize() -> CGSize {
+        return CGSize(width: self.x, height: self.y)
     }
 }
