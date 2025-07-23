@@ -26,12 +26,12 @@ struct KBCardDraggableView: View {
                     }
                     .onEnded { value in
                         let finalPosition = offset + value.translation
-//                        let cardSize = CGSize(width: 150, height: 150)
-//                        let cardFrame = CGRect(origin: CGPoint(x: finalPosition.width,
-//                                                               y: finalPosition.height),
-//                                               size: cardSize)
+                        let cardSize = CGSize(width: 150, height: 150)
+                        let cardFrame = CGRect(origin: CGPoint(x: finalPosition.width,
+                                                               y: finalPosition.height),
+                                               size: cardSize)
                         
-                        let cardFrame = CGRect(origin: dragLocation.wrappedValue, size: CGSize(width: 10, height: 10))
+//                        let cardFrame = CGRect(origin: dragLocation.wrappedValue, size: CGSize(width: 10, height: 10))
                         
                         let tmp = KBoardDropTargets.shared.targets
                         
