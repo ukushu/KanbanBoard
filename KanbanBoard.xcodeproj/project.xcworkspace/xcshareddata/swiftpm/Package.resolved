@@ -1,5 +1,5 @@
 {
-  "originHash" : "637b4a0c379e6e04a821c23c119d102e6617d4aa4988108904316ef06051b07d",
+  "originHash" : "eb0f1c9a84db73622bc2ec5c058e9678a489f098ee3283ac27dc6d18f55e1ac9",
   "pins" : [
     {
       "identity" : "essentials",
@@ -13,7 +13,7 @@
     {
       "identity" : "moreswiftui",
       "kind" : "remoteSourceControl",
-      "location" : "git@gitlab.com:UKS/moreswiftui.git",
+      "location" : "https://gitlab.com/UKS/moreswiftui.git",
       "state" : {
         "branch" : "main",
         "revision" : "5364e2c26ca73a3c7a7aeef2db04b8bf8fe4de21"

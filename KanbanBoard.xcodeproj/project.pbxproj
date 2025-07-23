@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1DB8ED242E0DBE7E006561BD /* MoreSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1DB8ED232E0DBE7E006561BD /* MoreSwiftUI */; };
+		1D0F907B2E310769000AC5FF /* MoreSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1D0F907A2E310769000AC5FF /* MoreSwiftUI */; };
 		1DB8ED3A2E10355F006561BD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DB8ED312E10355F006561BD /* Preview Assets.xcassets */; };
 		1DB8ED3B2E10355F006561BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DB8ED352E10355F006561BD /* Assets.xcassets */; };
 		1DB8ED3C2E10355F006561BD /* KBCardID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED262E10355F006561BD /* KBCardID.swift */; };
@@ -70,8 +70,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DEB7A012DC96783006B6059 /* Essentials in Frameworks */,
-				1DB8ED242E0DBE7E006561BD /* MoreSwiftUI in Frameworks */,
 				1DB8ED4E2E103601006561BD /* OrderedCollections in Frameworks */,
+				1D0F907B2E310769000AC5FF /* MoreSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,8 +185,8 @@
 			name = KanbanBoard;
 			packageProductDependencies = (
 				1DEB7A002DC96783006B6059 /* Essentials */,
-				1DB8ED232E0DBE7E006561BD /* MoreSwiftUI */,
 				1DB8ED4D2E103601006561BD /* OrderedCollections */,
+				1D0F907A2E310769000AC5FF /* MoreSwiftUI */,
 			);
 			productName = KanbanBoard;
 			productReference = 1DEB79E02DC96513006B6059 /* KanbanBoard.app */;
@@ -218,8 +218,8 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				1DEB79FF2DC96783006B6059 /* XCRemoteSwiftPackageReference "essentials" */,
-				1DB8ED222E0DBE7E006561BD /* XCRemoteSwiftPackageReference "moreswiftui" */,
 				1DB8ED4C2E103601006561BD /* XCRemoteSwiftPackageReference "swift-collections" */,
+				1D0F90792E310769000AC5FF /* XCRemoteSwiftPackageReference "moreswiftui" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1DEB79E12DC96513006B6059 /* Products */;
@@ -466,9 +466,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		1DB8ED222E0DBE7E006561BD /* XCRemoteSwiftPackageReference "moreswiftui" */ = {
+		1D0F90792E310769000AC5FF /* XCRemoteSwiftPackageReference "moreswiftui" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@gitlab.com:UKS/moreswiftui.git";
+			repositoryURL = "https://gitlab.com/UKS/moreswiftui.git";
 			requirement = {
 				branch = main;
 				kind = branch;
@@ -493,9 +493,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		1DB8ED232E0DBE7E006561BD /* MoreSwiftUI */ = {
+		1D0F907A2E310769000AC5FF /* MoreSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 1DB8ED222E0DBE7E006561BD /* XCRemoteSwiftPackageReference "moreswiftui" */;
+			package = 1D0F90792E310769000AC5FF /* XCRemoteSwiftPackageReference "moreswiftui" */;
 			productName = MoreSwiftUI;
 		};
 		1DB8ED4D2E103601006561BD /* OrderedCollections */ = {
