@@ -5,12 +5,12 @@ import SwiftUI
 let cellSize: CGSize = CGSize(width: 100, height: 100)
 
 struct KBCell: Codable {
-    var id: UUID = UUID()
+    var wPos: Int
+    var hPos: Int
+    var id: String { "\(wPos)x\(hPos)" }
     
-    var maxItems: Int = 4
     var cards: [KBCardID]
-    var color: Color = .gray
-    //[.red, .orange, .yellow, .green, .blue, .purple, .pink, .gray, .black, .white].randomElement()!
+    var color: Color { .yellow }
 }
 
 extension KBCell: Identifiable, Hashable  {
@@ -37,16 +37,11 @@ struct KBCellView: View {
                 Spacer(minLength: 5)
             }
             .frame(width: cellSize.width, height: cellSize.height)
-            .onAppear {
-                if KBoardDropTargets.shared.targets[cell.id] != geo.frame(in: .global) {
-                    KBoardDropTargets.shared.targets[cell.id] = geo.frame(in: .global)
-                }
-            }
             .background {
                 VStack {
                     HStack {
                         Spacer()
-                        Text("\(cell.maxItems)")
+                        Text("\(cell.id)")
                             .padding(5)
                     }
                     
@@ -59,7 +54,6 @@ struct KBCellView: View {
         .cornerRadius(10)
         .shadow(radius: 2)
         .id(cell.id)
-        
     }
 }
 
