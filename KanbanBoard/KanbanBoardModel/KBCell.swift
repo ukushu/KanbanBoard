@@ -10,7 +10,7 @@ struct KBCell: Codable {
     var id: String { "\(wPos)x\(hPos)" }
     
     var cards: [KBCardID]
-    var color: Color { .yellow }
+    var color: Color { wPos % 2 == 0 ? .yellow : .blue }
 }
 
 extension KBCell: Identifiable, Hashable  {

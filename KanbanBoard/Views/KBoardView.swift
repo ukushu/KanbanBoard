@@ -37,7 +37,7 @@ struct KBoardView: View {
                     ForEach(Array(model.board.columns.enumerated()), id: \.offset) { idx, text in
                         Text(text)
                             .frame(width: 100)
-                            .contextMenu{
+                            .contextMenu {
                                 Button("delete") {
                                     model.remove(colIdx: idx)
                                 }
