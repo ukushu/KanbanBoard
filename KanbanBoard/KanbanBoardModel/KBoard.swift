@@ -3,8 +3,8 @@ import SwiftUI
 import Essentials
 
 struct KBoard: Codable {
-    var columns: [String] = []
-    var rows: [String] = []
+    var columns: [KBTitle] = []
+    var rows: [KBTitle] = []
     
     var cellCards: [String: [KBCardID]] = [:]
 }
@@ -30,12 +30,12 @@ class KBoardVM: ObservableObject {
     }
     
     func insert(row: String) {
-        boardID.document.content.rows.append(row)
+        boardID.document.content.rows.append( KBTitle(title: row) )
         rebuildCells()
     }
     
-    func insert(column: String) {
-        boardID.document.content.columns.append(column)
+    func insert(col: String) {
+        boardID.document.content.columns.append( KBTitle(title: col) )
         rebuildCells()
     }
     
@@ -49,6 +49,16 @@ class KBoardVM: ObservableObject {
         rebuildCells()
     }
     
+    func rename(colIdx: Int, to newTitle: String) {
+        boardID.document.content.columns[colIdx].title = newTitle
+        rebuildCells()
+    }
+    
+    func rename(rowIdx: Int, to newTitle: String) {
+        boardID.document.content.rows[rowIdx].title = newTitle
+        rebuildCells()
+    }
+    
     private func rebuildCells() {
         var futureCells: [KBCell] = []
         
@@ -58,7 +68,7 @@ class KBoardVM: ObservableObject {
             }
         }
         
-        self.columns = boardID.document.content.columns.inserting("", at: 0).map{ _ in GridItem(.flexible()) }
+        self.columns = boardID.document.content.columns.inserting(KBTitle(title: ""), at: 0).map{ _ in GridItem(.flexible()) }
         
         cells = futureCells
     }

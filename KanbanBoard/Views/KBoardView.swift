@@ -6,6 +6,8 @@ struct KBoardView: View {
     let projID: ProjID
     @ObservedObject var model : KBoardVM
     
+    @State var titleEditId: UUID? = nil
+    
     init(projID: ProjID) {
         self.projID = projID
         model = projID.boardsDocument.content.values.first!.viewModel
@@ -23,7 +25,7 @@ struct KBoardView: View {
                 }
                 
                 Button("+ col") {
-                    model.insert(column: "hello")
+                    model.insert(col: "hello")
                 }
                 
                 Spacer()
@@ -34,25 +36,33 @@ struct KBoardView: View {
                     Color.clickableAlpha
                         .frame(width: 100)
                     
-                    ForEach(Array(model.board.columns.enumerated()), id: \.offset) { idx, text in
-                        Text(text)
-                            .frame(width: 100)
-                            .contextMenu {
-                                Button("delete") {
-                                    model.remove(colIdx: idx)
-                                }
+                    ForEach(Array(model.board.columns.enumerated()), id: \.offset) { idx, title in
+                        EditableTitle(title.title) { newTitle in
+                            if let idx = model.board.columns.firstIndexInt(where: { $0.id == title.id }) {
+                                model.rename(colIdx: idx, to: newTitle)
                             }
+                        }
+                        .frame(width: 100)
+                        .contextMenu {
+                            Button("delete") {
+                                model.remove(colIdx: idx)
+                            }
+                        }
                     }
                     
                     let rows = model.cells.chunked(by: model.columns.count - 1)
                     
-                    ForEach(Array(model.board.rows.enumerated()), id: \.offset) { idx, text in
-                        Text(text)
-                            .contextMenu {
-                                Button("delete") {
-                                    model.remove(rowIdx: idx)
-                                }
+                    ForEach(Array(model.board.rows.enumerated()), id: \.offset) { idx, title in
+                        EditableTitle(title.title) { newTitle in
+                            if let idx = model.board.rows.firstIndexInt(where: { $0.id == title.id }) {
+                                model.rename(rowIdx: idx, to: newTitle)
                             }
+                        }
+                        .contextMenu {
+                            Button("delete") {
+                                model.remove(rowIdx: idx)
+                            }
+                        }
                         
                         if rows.count > 0 {
                             ForEach(rows[idx] ) { cell in
@@ -68,6 +78,49 @@ struct KBoardView: View {
     }
 }
 
+
+@available(macOS 10.15, *)
+public struct EditableTitle: View {
+    @State var text: String
+    @State private var newValue: String = ""
+    
+    @State var editProcessGoing = false { didSet{ newValue = text } }
+    
+    let onEditEnd: (String) -> Void
+    
+    public init(_ txt: String, onEditEnd: @escaping (String) -> Void) {
+        text = txt
+        self.onEditEnd = onEditEnd
+    }
+    
+    @ViewBuilder
+    public var body: some View {
+        ZStack {
+            // Text variation of View
+            if text.isEmpty {
+                Text("[Empty]")
+                    .opacity(0.3)
+                    .opacity(editProcessGoing ? 0 : 1)
+            } else {
+                Text(text)
+                    .opacity(editProcessGoing ? 0 : 1)
+            }
+            
+            // TextField for edit mode of View
+            TextField("", text: $newValue,
+                          onEditingChanged: { _ in },
+                          onCommit: { text = newValue; editProcessGoing = false; onEditEnd(newValue) } )
+                .opacity(editProcessGoing ? 1 : 0)
+        }
+        // Enable EditMode on double tap
+        .onTapGesture(count: 2, perform: { editProcessGoing = true } )
+        // Exit from EditMode on Esc key press
+        .onExitCommand(perform: { editProcessGoing = false; newValue = text })
+    }
+}
+
 #Preview {
     KBoardView(projID: .sampleProject)
 }
+
+
