@@ -19,11 +19,15 @@ struct KBoardView: View {
                 Spacer()
                 
                 Button("+ row") {
-                    model.insert(row: "hello1")
+                    model.insert(row: "Row \(model.board.rows.count + 1)")
                 }
                 
                 Button("+ col") {
-                    model.insert(col: "hello")
+                    model.insert(col: "Col \(model.board.columns.count + 1)")
+                }
+                
+                Button("Refresh") {
+                    model.objectWillChange.send()
                 }
                 
                 Spacer()
@@ -58,9 +62,10 @@ struct KBoardView: View {
                 }
                 
                 Button("delete") {
-                    model.remove(colIdx: idx)
+                    model.remove(colId: title.id)
                 }
             }
+            .id(title.id)
         }
     }
     
@@ -80,9 +85,10 @@ struct KBoardView: View {
                 }
                 
                 Button("delete") {
-                    model.remove(rowIdx: idx)
+                    model.remove(rowId: title.id)
                 }
             }
+            .id(title.id)
             
             if rows.count > 0 {
                 ForEach(rows[idx] ) { cell in

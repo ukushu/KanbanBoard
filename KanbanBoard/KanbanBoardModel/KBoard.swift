@@ -26,40 +26,44 @@ class KBoardVM: ObservableObject {
     init(boardID: KBoardID) {
         self.boardID = boardID
         
-        rebuildCells()
+        refreshCells()
     }
     
     func insert(row: String) {
         boardID.document.content.rows.append( KBTitle(title: row) )
-        rebuildCells()
+        refreshCells()
     }
     
     func insert(col: String) {
         boardID.document.content.columns.append( KBTitle(title: col) )
-        rebuildCells()
+        refreshCells()
     }
     
-    func remove(rowIdx: Int) {
-        boardID.document.content.rows.remove(at: rowIdx)
-        rebuildCells()
+    func remove(rowId: UUID) {
+        if let idx = boardID.document.content.rows.firstIndex(where: { $0.id == rowId }) {
+            boardID.document.content.rows.remove(at: idx)
+        }
+        refreshCells()
     }
     
-    func remove(colIdx: Int) {
-        boardID.document.content.columns.remove(at: colIdx)
-        rebuildCells()
+    func remove(colId: UUID) {
+        if let idx = boardID.document.content.columns.firstIndex(where: { $0.id == colId }) {
+            boardID.document.content.columns.remove(at: idx)
+        }
+        refreshCells()
     }
     
     func rename(colIdx: Int, to newTitle: String) {
         boardID.document.content.columns[colIdx].title = newTitle
-        rebuildCells()
+        refreshCells()
     }
     
     func rename(rowIdx: Int, to newTitle: String) {
         boardID.document.content.rows[rowIdx].title = newTitle
-        rebuildCells()
+        refreshCells()
     }
     
-    private func rebuildCells() {
+    private func refreshCells() {
         var futureCells: [KBCell] = []
         
         for rowIdx in 0..<boardID.document.content.rows.count {
