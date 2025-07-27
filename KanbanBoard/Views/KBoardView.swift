@@ -18,8 +18,6 @@ struct KBoardView: View {
             HStack {
                 Spacer()
                 
-//                Text("Cols: \(model.columns.count); Cells in col: \(model.board.cells.count / max(model.columns.count, 1) )")
-                
                 Button("+ row") {
                     model.insert(row: "hello1")
                 }
@@ -33,48 +31,65 @@ struct KBoardView: View {
             
             ScrollView([.horizontal, .vertical], showsIndicators: true) {
                 LazyVGrid(columns: model.columns, spacing: 7) {
-                    Color.clickableAlpha
-                        .frame(width: 100)
+                    BoardColTitlesView()
                     
-                    ForEach(Array(model.board.columns.enumerated()), id: \.offset) { idx, title in
-                        EditableTitle(title.title) { newTitle in
-                            if let idx = model.board.columns.firstIndexInt(where: { $0.id == title.id }) {
-                                model.rename(colIdx: idx, to: newTitle)
-                            }
-                        }
-                        .frame(width: 100)
-                        .contextMenu {
-                            Button("delete") {
-                                model.remove(colIdx: idx)
-                            }
-                        }
-                    }
-                    
-                    let rows = model.cells.chunked(by: model.columns.count - 1)
-                    
-                    ForEach(Array(model.board.rows.enumerated()), id: \.offset) { idx, title in
-                        EditableTitle(title.title) { newTitle in
-                            if let idx = model.board.rows.firstIndexInt(where: { $0.id == title.id }) {
-                                model.rename(rowIdx: idx, to: newTitle)
-                            }
-                        }
-                        .contextMenu {
-                            Button("delete") {
-                                model.remove(rowIdx: idx)
-                            }
-                        }
-                        
-                        if rows.count > 0 {
-                            ForEach(rows[idx] ) { cell in
-                                cell.asView()
-                            }
-                        }
-                    }
+                    BoardRowTitlesAndContentView()
+                }
+            }
+        }
+        .padding()
+    }
+    
+    @ViewBuilder
+    func BoardColTitlesView() -> some View {
+        Color.clickableAlpha
+            .frame(width: 100)
+        
+        ForEach(Array(model.board.columns.enumerated()), id: \.offset) { idx, title in
+            EditableTitle(title.title) { newTitle in
+                if let idx = model.board.columns.firstIndexInt(where: { $0.id == title.id }) {
+                    model.rename(colIdx: idx, to: newTitle)
+                }
+            }
+            .frame(width: 100)
+            .contextMenu {
+                Button("edit") {
+                    titleEditId = title.id
+                }
+                
+                Button("delete") {
+                    model.remove(colIdx: idx)
+                }
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func BoardRowTitlesAndContentView() -> some View {
+        let rows = model.cells.chunked(by: model.columns.count - 1)
+        
+        ForEach(Array(model.board.rows.enumerated()), id: \.offset) { idx, title in
+            EditableTitle(title.title) { newTitle in
+                if let idx = model.board.rows.firstIndexInt(where: { $0.id == title.id }) {
+                    model.rename(rowIdx: idx, to: newTitle)
+                }
+            }
+            .contextMenu {
+                Button("edit") {
+                    titleEditId = title.id
+                }
+                
+                Button("delete") {
+                    model.remove(rowIdx: idx)
                 }
             }
             
+            if rows.count > 0 {
+                ForEach(rows[idx] ) { cell in
+                    cell.asView()
+                }
+            }
         }
-        .padding()
     }
 }
 
