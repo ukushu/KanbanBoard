@@ -133,7 +133,12 @@ public struct EditableTitle: View {
         // Enable EditMode on double tap
         .onTapGesture(count: 2, perform: { editingId = title.id } )
         // Exit from EditMode on Esc key press
-        .onExitCommand(perform: { editingId = nil; newValue = title.title })
+        .onExitCommand(perform: { editingId = nil })
+        .onChange(of: editingId) {
+            if newValue != title.title {
+                newValue = title.title
+            }
+        }
     }
 }
 
