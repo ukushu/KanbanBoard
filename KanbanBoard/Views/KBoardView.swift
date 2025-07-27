@@ -97,14 +97,9 @@ public struct EditableTitle: View {
     public var body: some View {
         ZStack {
             // Text variation of View
-            if text.isEmpty {
-                Text("[Empty]")
-                    .opacity(0.3)
-                    .opacity(editProcessGoing ? 0 : 1)
-            } else {
-                Text(text)
-                    .opacity(editProcessGoing ? 0 : 1)
-            }
+            Text(text.isEmpty ? "[Empty]" : text)
+                .if(text.isEmpty) { $0.opacity(0.3) }
+                .opacity(editProcessGoing ? 0 : 1)
             
             // TextField for edit mode of View
             TextField("", text: $newValue,
