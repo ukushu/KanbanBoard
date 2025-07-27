@@ -1,6 +1,6 @@
 import Foundation
 
-struct KBTitle: Codable, Identifiable {
+struct KBTitle: Codable, Identifiable, Hashable {
     var id: UUID = UUID()
     var title: String
 }

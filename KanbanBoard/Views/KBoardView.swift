@@ -50,7 +50,7 @@ struct KBoardView: View {
             .frame(width: 100)
         
         ForEach(Array(model.board.columns.enumerated()), id: \.offset) { idx, title in
-            EditableTitle(title.title) { newTitle in
+            EditableTitle(title, editingId: $titleEditId) { newTitle in
                 if let idx = model.board.columns.firstIndexInt(where: { $0.id == title.id }) {
                     model.rename(colIdx: idx, to: newTitle)
                 }
@@ -65,7 +65,7 @@ struct KBoardView: View {
                     model.remove(colId: title.id)
                 }
             }
-            .id(title.id)
+            .id(title)
         }
     }
     
@@ -74,7 +74,7 @@ struct KBoardView: View {
         let rows = model.cells.chunked(by: model.columns.count - 1)
         
         ForEach(Array(model.board.rows.enumerated()), id: \.offset) { idx, title in
-            EditableTitle(title.title) { newTitle in
+            EditableTitle(title, editingId: $titleEditId) { newTitle in
                 if let idx = model.board.rows.firstIndexInt(where: { $0.id == title.id }) {
                     model.rename(rowIdx: idx, to: newTitle)
                 }
@@ -88,7 +88,7 @@ struct KBoardView: View {
                     model.remove(rowId: title.id)
                 }
             }
-            .id(title.id)
+            .id(title)
             
             if rows.count > 0 {
                 ForEach(rows[idx] ) { cell in
@@ -102,15 +102,17 @@ struct KBoardView: View {
 
 @available(macOS 10.15, *)
 public struct EditableTitle: View {
-    @State var text: String
+    @State var title: KBTitle
     @State private var newValue: String = ""
     
-    @State var editProcessGoing = false { didSet{ newValue = text } }
+    @Binding var editingId: UUID?
     
     let onEditEnd: (String) -> Void
     
-    public init(_ txt: String, onEditEnd: @escaping (String) -> Void) {
-        text = txt
+    init(_ title: KBTitle, editingId: Binding<UUID?>,onEditEnd: @escaping (String) -> Void) {
+        self.title = title
+        newValue = title.title
+        _editingId = editingId
         self.onEditEnd = onEditEnd
     }
     
@@ -118,25 +120,23 @@ public struct EditableTitle: View {
     public var body: some View {
         ZStack {
             // Text variation of View
-            Text(text.isEmpty ? "[Empty]" : text)
-                .if(text.isEmpty) { $0.opacity(0.3) }
-                .opacity(editProcessGoing ? 0 : 1)
+            Text(title.title.isEmpty ? "[Empty]" : title.title)
+                .if(title.title.isEmpty) { $0.opacity(0.3) }
+                .opacity(editingId == title.id ? 0 : 1)
             
             // TextField for edit mode of View
-            TextField("", text: $newValue,
+            TextField(title.title, text: $newValue,
                           onEditingChanged: { _ in },
-                          onCommit: { text = newValue; editProcessGoing = false; onEditEnd(newValue) } )
-                .opacity(editProcessGoing ? 1 : 0)
+                          onCommit: { editingId = nil; onEditEnd(newValue) } )
+                .opacity(editingId == title.id ? 1 : 0)
         }
         // Enable EditMode on double tap
-        .onTapGesture(count: 2, perform: { editProcessGoing = true } )
+        .onTapGesture(count: 2, perform: { editingId = title.id } )
         // Exit from EditMode on Esc key press
-        .onExitCommand(perform: { editProcessGoing = false; newValue = text })
+        .onExitCommand(perform: { editingId = nil; newValue = title.title })
     }
 }
 
 #Preview {
     KBoardView(projID: .sampleProject)
 }
-
-
