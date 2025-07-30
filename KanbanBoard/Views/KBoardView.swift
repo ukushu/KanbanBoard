@@ -130,20 +130,17 @@ struct ColDropDelegate: DropDelegate {
     @Binding var draggedId: UUID?
     let model: KBoardVM
     
-    func performDrop(info: DropInfo) -> Bool {
+    func dropEntered(info: DropInfo) {
         doWork(info: info)
-        
+    }
+    
+    func performDrop(info: DropInfo) -> Bool {
         self.draggedId = nil
         return true
     }
     
-    func dropEntered(info: DropInfo) {
-        doWork(info: info)
-        self.draggedId = draggedId
-    }
-    
     func doWork(info: DropInfo) {
-        guard let draggedId = draggedId,
+        guard let draggedId,
               let from = model.board.columns.firstIndex(where: { $0.id == draggedId }),
               let to = model.board.columns.firstIndex(where: { $0.id == current })
         else { return }
@@ -169,7 +166,6 @@ struct RowDropDelegate: DropDelegate {
     
     func dropEntered(info: DropInfo) {
         doWork(info: info)
-        self.draggedId = draggedId
     }
     
     func doWork(info: DropInfo) {
