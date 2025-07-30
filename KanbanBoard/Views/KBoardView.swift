@@ -131,30 +131,25 @@ struct ColDropDelegate: DropDelegate {
     let model: KBoardVM
     
     func performDrop(info: DropInfo) -> Bool {
-        guard let draggedId = draggedId,
-              let from = model.board.columns.firstIndex(where: { $0.id == draggedId }),
-              let to = model.board.columns.firstIndex(where: { $0.id == current }),
-              from != to
-        else { return false }
+        doWork(info: info)
         
-        withAnimation {
-            model.moveCol(from: from, to: to)
-            self.draggedId = nil
-        }
-        
+        self.draggedId = nil
         return true
     }
     
     func dropEntered(info: DropInfo) {
+        doWork(info: info)
+        self.draggedId = draggedId
+    }
+    
+    func doWork(info: DropInfo) {
         guard let draggedId = draggedId,
               let from = model.board.columns.firstIndex(where: { $0.id == draggedId }),
-              let to = model.board.columns.firstIndex(where: { $0.id == current }),
-              from != to
+              let to = model.board.columns.firstIndex(where: { $0.id == current })
         else { return }
         
         withAnimation {
             model.moveCol(from: from, to: to)
-            self.draggedId = draggedId
         }
     }
 }
@@ -166,30 +161,25 @@ struct RowDropDelegate: DropDelegate {
     let model: KBoardVM
     
     func performDrop(info: DropInfo) -> Bool {
-        guard let draggedId = draggedId,
-              let from = model.board.rows.firstIndex(where: { $0.id == draggedId }),
-              let to = model.board.rows.firstIndex(where: { $0.id == current }),
-              from != to
-        else { return false }
+        doWork(info: info)
         
-        withAnimation {
-            model.moveRow(from: from, to: to)
-            self.draggedId = nil
-        }
-        
+        self.draggedId = nil
         return true
     }
     
     func dropEntered(info: DropInfo) {
+        doWork(info: info)
+        self.draggedId = draggedId
+    }
+    
+    func doWork(info: DropInfo) {
         guard let draggedId = draggedId,
               let from = model.board.rows.firstIndex(where: { $0.id == draggedId }),
-              let to = model.board.rows.firstIndex(where: { $0.id == current }),
-              from != to
+              let to = model.board.rows.firstIndex(where: { $0.id == current })
         else { return }
         
         withAnimation {
             model.moveRow(from: from, to: to)
-            self.draggedId = draggedId
         }
     }
 }
