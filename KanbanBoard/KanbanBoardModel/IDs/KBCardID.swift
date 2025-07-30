@@ -2,7 +2,7 @@
 import Foundation
 import Essentials
 
-struct KBCardID : Hashable, Codable {
+struct KBCardID : Hashable, Codable, Identifiable {
     public var boardID: UUID
     private(set) var id : UUID
     

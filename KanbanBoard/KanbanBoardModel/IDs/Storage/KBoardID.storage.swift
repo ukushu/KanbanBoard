@@ -7,9 +7,18 @@ import OrderedCollections
 extension KBoardID {
     var storage : Flow.Storage<KBoardID> { projID.storage(boardID: self) }
     
-    var document : Flow.Document<KBoard> {
+    var updatesBoard: Flow.Signal<KBoard> { self.flowBoard.$content }
+    var updatesCards: Flow.Signal<[String: [KBCardID]]> { self.flowCards.$content }
+    
+    var flowBoard : Flow.Document<KBoard> {
         return storage.lazyInit { boardID, pool in
             Flow.Document(jsonURL: Flow.ProjectID.sampleProject.kBoardUrl, defaultContent: KBoard(), errors: pool)
+        }
+    }
+    
+    var flowCards : Flow.Document<[String: [KBCardID]]> {
+        return storage.lazyInit { boardID, pool in
+            Flow.Document(jsonURL: Flow.ProjectID.sampleProject.kBoardCardsUrl, defaultContent: [:], errors: pool)
         }
     }
     
@@ -19,3 +28,11 @@ extension KBoardID {
         }
     }
 }
+
+
+//struct KBoardID {
+//    static var flow: Flow.Document<ConfigFile> { Flow.ProjectID.memProjID.config }
+//    static var bind: Binding<ConfigFile> { Flow.ProjectID.memProjID.configBinding }
+//    static var val: ConfigFile { Config.bind.wrappedValue }
+//    static var updates: Flow.Signal<ConfigFile> { Flow.ProjectID.memProjID.config.$content }
+//}

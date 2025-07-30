@@ -5,6 +5,7 @@ import MoreSwiftUI
 import SwiftUI
 
 struct KBCard: Codable {
+    var cardID: KBCardID
     var users: [KBUser]
     
     var color: Color = Color(hex: 0xfef8ab)

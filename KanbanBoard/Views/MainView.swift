@@ -10,18 +10,18 @@ struct MainView: View {
     
     init(kBoardID: KBoardID) {
         self.kBoardID = kBoardID
-        self.model = kBoardID.projID.boardsDocument.content.values.first!.document
+        self.model = kBoardID.projID.boardsDocument.content.values.first!.flowBoard
     }
     
     @State private var fieldFrame: CGRect = .zero
-    let card = KBCard(
-        users: [KBUser(email: "gmail.com", name: "Куся", responsibility: "dev")],
-            issueName: "Фікс бага",
-            issueURL: URL(string: "https://example.com"),
-            dateCreation: Date(),
-            dateEnd: Date().addingTimeInterval(86400),
-            tags: "bug,urgent"
-        )
+//    let card = KBCard(
+//        cardID: KBCardID(boardID: self.kBoardID, uuid: UUID()), users: [KBUser(email: "gmail.com", name: "Куся", responsibility: "dev")],
+//            issueName: "Фікс бага",
+//            issueURL: URL(string: "https://example.com"),
+//            dateCreation: Date(),
+//            dateEnd: Date().addingTimeInterval(86400),
+//            tags: "bug,urgent"
+//        )
     
     
     var body: some View {

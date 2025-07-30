@@ -30,4 +30,5 @@ extension Flow.ProjectID {
     
     var kboardUsersListUrl   : URL    { self.url.appendingPathComponent("KanbanBoardUsersList.txt") }
     var kBoardUrl: URL                { self.url.appendingPathComponent("kBoard.txt") }
+    var kBoardCardsUrl: URL                { self.url.appendingPathComponent("kBoardCards.txt") }
 }
