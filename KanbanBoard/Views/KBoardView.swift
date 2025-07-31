@@ -5,7 +5,8 @@ import Essentials
 
 struct KBoardView: View {
     let kBoardID: KBoardID
-    @ObservedObject var docCards : Flow.Document<[String : [KBCardID]]>
+    @ObservedObject var document : Flow.Document<KBoard>
+    @ObservedObject var documentCards : Flow.Document<[String : [KBCardID]]>
     
     @State var titleEditId: UUID? = nil
     
@@ -13,7 +14,8 @@ struct KBoardView: View {
     
     init(kBoardID: KBoardID) {
         self.kBoardID = kBoardID
-        self.docCards = kBoardID.documentCards
+        self.document = kBoardID.document
+        self.documentCards = kBoardID.documentCards
     }
     
     var body: some View {
