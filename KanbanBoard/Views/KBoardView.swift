@@ -4,19 +4,16 @@ import MoreSwiftUI
 import Essentials
 
 struct KBoardView: View {
-    let projID: ProjID
     let kBoardID: KBoardID
-    @ObservedObject var flow : Flow.Document<[String : [KBCardID]]>
+    @ObservedObject var docCards : Flow.Document<[String : [KBCardID]]>
     
     @State var titleEditId: UUID? = nil
     
     @State private var draggedTitle: UUID? = nil
     
-    init(projID: ProjID) {
-        self.projID = projID
-        
-        self.kBoardID = projID.boardsDocument.content.values.first!
-        self.flow = kBoardID.documentCards
+    init(kBoardID: KBoardID) {
+        self.kBoardID = kBoardID
+        self.docCards = kBoardID.documentCards
     }
     
     var body: some View {
@@ -97,10 +94,6 @@ struct KBoardView: View {
             ))
         }
     }
-}
-
-#Preview {
-    KBoardView(projID: .sampleProject)
 }
 
 struct ColDropDelegate: DropDelegate {

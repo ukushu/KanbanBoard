@@ -26,7 +26,7 @@ struct MainView: View {
     
     var body: some View {
         ZStack {
-            KBoardView(projID: kBoardID.projID)
+            KBoardView(kBoardID: kBoardID)
 //                .coordinateSpace(name: "globalArea")
             
 //            KBCardDraggableView(kBoardID: kBoardID, card: card, fieldFrame: fieldFrame, dragLocation: $dragLocation)
