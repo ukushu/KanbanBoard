@@ -12,13 +12,11 @@ struct ProjView: View {
     }
     
     var body: some View {
-        ZStack {
-            KBoardView(kBoardID: projID.defaultBoardID)
-        }
+        KBoardView(kBoardID: projID.defaultBoardID)
     }
 }
 
-extension ProjID {
+fileprivate extension ProjID {
     var defaultBoardID : KBoardID {
         if let uuidBoardId = self.boardsListDocument.content.first {
             return KBoardID(projID: self, uuid: uuidBoardId)
