@@ -4,11 +4,13 @@ import Essentials
 
 struct MainView: View {
     @State var projID: ProjID
+    @ObservedObject var boardsListDocument : Flow.Document<OrderDict<UUID,KBoardID>>
     
     let kBoardID: KBoardID
     
     init(projID: ProjID) {
         self.projID = projID
+        self.boardsListDocument = projID.boardsListDocument
         
         if let kBoardID = projID.boardsListDocument.content.values.first {
             self.kBoardID = kBoardID
@@ -17,6 +19,8 @@ struct MainView: View {
             projID.boardsListDocument.content[UUID()] = kBoardID
             self.kBoardID = kBoardID
         }
+        
+        
     }
     
     var body: some View {

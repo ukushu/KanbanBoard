@@ -21,12 +21,6 @@ extension Flow.ProjectID {
 }
 
 extension Flow.ProjectID {
-    static var sampleProject : Flow.ProjectID {
-        let a = URL.userHome.appendingPathComponent("SampleKanbanBoardProj")
-        _ = a.makeSureDirExist()
-        return Flow.ProjectID(url: a)
-    }
-    
     var boardsListUrl : URL   { self.url.appendingPathComponent("KanbanBoardList.txt") }
-    var usersListUrl : URL    { self.url.appendingPathComponent("KanbanBoardUsersList.txt") }
+    var usersListUrl  : URL   { self.url.appendingPathComponent("KanbanBoardUsersList.txt") }
 }
