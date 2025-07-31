@@ -6,7 +6,7 @@ import SwiftUI
 struct KanbanBoardApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView(projID: .sampleProject )
+            ProjView(projID: .sampleProject )
         }
     }
 }

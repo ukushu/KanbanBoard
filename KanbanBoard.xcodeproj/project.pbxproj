@@ -19,7 +19,7 @@
 		1DB8ED422E10355F006561BD /* KBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED2E2E10355F006561BD /* KBoard.swift */; };
 		1DB8ED432E10355F006561BD /* KBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED2F2E10355F006561BD /* KBUser.swift */; };
 		1DB8ED442E10355F006561BD /* KBCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED332E10355F006561BD /* KBCardView.swift */; };
-		1DB8ED452E10355F006561BD /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED362E10355F006561BD /* MainView.swift */; };
+		1DB8ED452E10355F006561BD /* ProjView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED362E10355F006561BD /* ProjView.swift */; };
 		1DB8ED462E10355F006561BD /* KanbanBoardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED382E10355F006561BD /* KanbanBoardApp.swift */; };
 		1DB8ED492E10356E006561BD /* KBoardID.storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED482E10356C006561BD /* KBoardID.storage.swift */; };
 		1DB8ED4B2E1035C9006561BD /* ProjID.storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED4A2E1035C4006561BD /* ProjID.storage.swift */; };
@@ -55,7 +55,7 @@
 		1DB8ED312E10355F006561BD /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1DB8ED332E10355F006561BD /* KBCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBCardView.swift; sourceTree = "<group>"; };
 		1DB8ED352E10355F006561BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1DB8ED362E10355F006561BD /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		1DB8ED362E10355F006561BD /* ProjView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjView.swift; sourceTree = "<group>"; };
 		1DB8ED372E10355F006561BD /* KanbanBoard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KanbanBoard.entitlements; sourceTree = "<group>"; };
 		1DB8ED382E10355F006561BD /* KanbanBoardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KanbanBoardApp.swift; sourceTree = "<group>"; };
 		1DB8ED482E10356C006561BD /* KBoardID.storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBoardID.storage.swift; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				1DB64EED2E3C035A00258235 /* HelperViews */,
-				1DB8ED362E10355F006561BD /* MainView.swift */,
+				1DB8ED362E10355F006561BD /* ProjView.swift */,
 				1DEEFF562E2CC65800C4DE37 /* KBoardView.swift */,
 			);
 			path = Scenes;
@@ -259,7 +259,7 @@
 				1DB8ED422E10355F006561BD /* KBoard.swift in Sources */,
 				1DB8ED432E10355F006561BD /* KBUser.swift in Sources */,
 				1DB8ED442E10355F006561BD /* KBCardView.swift in Sources */,
-				1DB8ED452E10355F006561BD /* MainView.swift in Sources */,
+				1DB8ED452E10355F006561BD /* ProjView.swift in Sources */,
 				1DB8ED4B2E1035C9006561BD /* ProjID.storage.swift in Sources */,
 				1DB8ED462E10355F006561BD /* KanbanBoardApp.swift in Sources */,
 			);

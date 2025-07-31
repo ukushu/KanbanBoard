@@ -2,8 +2,8 @@
 import SwiftUI
 import Essentials
 
-struct MainView: View {
-    @State var projID: ProjID
+struct ProjView: View {
+    let projID: ProjID
     @ObservedObject var boardsListDocument : Flow.Document<OrderDict<UUID,KBoardID>>
     
     let kBoardID: KBoardID
