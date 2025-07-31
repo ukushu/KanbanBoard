@@ -99,18 +99,10 @@
 			path = IDs;
 			sourceTree = "<group>";
 		};
-		1DB8ED2A2E10355F006561BD /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Storage;
-			sourceTree = "<group>";
-		};
 		1DB8ED302E10355F006561BD /* KanbanBoardModel */ = {
 			isa = PBXGroup;
 			children = (
 				1DB8ED292E10355F006561BD /* IDs */,
-				1DB8ED2A2E10355F006561BD /* Storage */,
 				1DB8ED2B2E10355F006561BD /* KBCard.swift */,
 				1DB8ED2C2E10355F006561BD /* KBCell.swift */,
 				1DB8ED2E2E10355F006561BD /* KBoard.swift */,

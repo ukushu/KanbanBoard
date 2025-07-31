@@ -6,7 +6,7 @@ import Essentials
 struct KBoardView: View {
     let projID: ProjID
     let kBoardID: KBoardID
-    @ObservedObject var flow  : Flow.Document<[String : [KBCardID]]>
+    @ObservedObject var flow : Flow.Document<[String : [KBCardID]]>
     
     @State var titleEditId: UUID? = nil
     
