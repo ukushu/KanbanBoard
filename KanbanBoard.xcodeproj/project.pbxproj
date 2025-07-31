@@ -78,42 +78,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1D0F907E2E3603FC000AC5FF /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				1D0F907F2E360403000AC5FF /* EditableTitle.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
 		1DB64EE92E3BFF8300258235 /* Garbage */ = {
 			isa = PBXGroup;
 			children = (
+				1DB8ED332E10355F006561BD /* KBCardView.swift */,
 				1DB8ED2C2E10355F006561BD /* KBCell.swift */,
 				1DB8ED2F2E10355F006561BD /* KBUser.swift */,
+				1DB8ED262E10355F006561BD /* KBCardID.swift */,
+				1DB8ED282E10355F006561BD /* KBUserID.swift */,
+				1DB8ED2B2E10355F006561BD /* KBCard.swift */,
+				1DB8ED2E2E10355F006561BD /* KBoard.swift */,
 			);
 			path = Garbage;
 			sourceTree = "<group>";
 		};
-		1DB8ED292E10355F006561BD /* IDs */ = {
+		1DB64EEA2E3C02D700258235 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				1DB8ED472E103566006561BD /* Storage */,
+				1DB64EEB2E3C02E000258235 /* Storage */,
 				1DB8ED272E10355F006561BD /* KBoardID.swift */,
-				1DB8ED262E10355F006561BD /* KBCardID.swift */,
-				1DB8ED282E10355F006561BD /* KBUserID.swift */,
 			);
-			path = IDs;
+			path = Entities;
 			sourceTree = "<group>";
 		};
-		1DB8ED302E10355F006561BD /* KanbanBoardModel */ = {
+		1DB64EEB2E3C02E000258235 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
-				1DB8ED292E10355F006561BD /* IDs */,
-				1DB8ED2B2E10355F006561BD /* KBCard.swift */,
-				1DB8ED2E2E10355F006561BD /* KBoard.swift */,
+				1DB8ED482E10356C006561BD /* KBoardID.storage.swift */,
+				1DB8ED4A2E1035C4006561BD /* ProjID.storage.swift */,
 			);
-			path = KanbanBoardModel;
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		1DB64EEC2E3C034200258235 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1DB64EED2E3C035A00258235 /* HelperViews */,
+				1DB8ED362E10355F006561BD /* MainView.swift */,
+				1DEEFF562E2CC65800C4DE37 /* KBoardView.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		1DB64EED2E3C035A00258235 /* HelperViews */ = {
+			isa = PBXGroup;
+			children = (
+				1D0F907F2E360403000AC5FF /* EditableTitle.swift */,
+			);
+			path = HelperViews;
 			sourceTree = "<group>";
 		};
 		1DB8ED322E10355F006561BD /* Preview Content */ = {
@@ -124,38 +136,18 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		1DB8ED342E10355F006561BD /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				1D0F907E2E3603FC000AC5FF /* Helpers */,
-				1DB8ED362E10355F006561BD /* MainView.swift */,
-				1DEEFF562E2CC65800C4DE37 /* KBoardView.swift */,
-				1DB8ED332E10355F006561BD /* KBCardView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		1DB8ED392E10355F006561BD /* KanbanBoard */ = {
 			isa = PBXGroup;
 			children = (
-				1DB8ED342E10355F006561BD /* Views */,
-				1DB8ED302E10355F006561BD /* KanbanBoardModel */,
+				1DB8ED382E10355F006561BD /* KanbanBoardApp.swift */,
+				1DB64EEA2E3C02D700258235 /* Entities */,
+				1DB64EEC2E3C034200258235 /* Scenes */,
 				1DB8ED322E10355F006561BD /* Preview Content */,
 				1DB64EE92E3BFF8300258235 /* Garbage */,
 				1DB8ED352E10355F006561BD /* Assets.xcassets */,
 				1DB8ED372E10355F006561BD /* KanbanBoard.entitlements */,
-				1DB8ED382E10355F006561BD /* KanbanBoardApp.swift */,
 			);
 			path = KanbanBoard;
-			sourceTree = "<group>";
-		};
-		1DB8ED472E103566006561BD /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				1DB8ED482E10356C006561BD /* KBoardID.storage.swift */,
-				1DB8ED4A2E1035C4006561BD /* ProjID.storage.swift */,
-			);
-			path = Storage;
 			sourceTree = "<group>";
 		};
 		1DEB79D72DC96513006B6059 = {
