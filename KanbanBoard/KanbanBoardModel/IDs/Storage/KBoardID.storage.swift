@@ -21,18 +21,4 @@ extension KBoardID {
             Flow.Document(jsonURL: boardID.cardsUrl, defaultContent: [:], errors: pool)
         }
     }
-    
-//    var viewModel : KBoardVM {
-//        storage.lazyInit { boardID, _ in
-//            KBoardVM(boardID: boardID)
-//        }
-//    }
 }
-
-
-//struct KBoardID {
-//    static var flow: Flow.Document<ConfigFile> { Flow.ProjectID.memProjID.config }
-//    static var bind: Binding<ConfigFile> { Flow.ProjectID.memProjID.configBinding }
-//    static var val: ConfigFile { Config.bind.wrappedValue }
-//    static var updates: Flow.Signal<ConfigFile> { Flow.ProjectID.memProjID.config.$content }
-//}

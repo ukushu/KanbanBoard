@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1D0F907B2E310769000AC5FF /* MoreSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1D0F907A2E310769000AC5FF /* MoreSwiftUI */; };
-		1D0F907D2E35F4A1000AC5FF /* KBTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F907C2E35F49C000AC5FF /* KBTitle.swift */; };
 		1D0F90802E360404000AC5FF /* EditableTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F907F2E360403000AC5FF /* EditableTitle.swift */; };
 		1DB8ED3A2E10355F006561BD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DB8ED312E10355F006561BD /* Preview Assets.xcassets */; };
 		1DB8ED3B2E10355F006561BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DB8ED352E10355F006561BD /* Assets.xcassets */; };
@@ -45,7 +44,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1D0F907C2E35F49C000AC5FF /* KBTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBTitle.swift; sourceTree = "<group>"; };
 		1D0F907F2E360403000AC5FF /* EditableTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTitle.swift; sourceTree = "<group>"; };
 		1DB8ED262E10355F006561BD /* KBCardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBCardID.swift; sourceTree = "<group>"; };
 		1DB8ED272E10355F006561BD /* KBoardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBoardID.swift; sourceTree = "<group>"; };
@@ -88,6 +86,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		1DB64EE92E3BFF8300258235 /* Garbage */ = {
+			isa = PBXGroup;
+			children = (
+				1DB8ED2C2E10355F006561BD /* KBCell.swift */,
+				1DB8ED2F2E10355F006561BD /* KBUser.swift */,
+			);
+			path = Garbage;
+			sourceTree = "<group>";
+		};
 		1DB8ED292E10355F006561BD /* IDs */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,10 +111,7 @@
 			children = (
 				1DB8ED292E10355F006561BD /* IDs */,
 				1DB8ED2B2E10355F006561BD /* KBCard.swift */,
-				1DB8ED2C2E10355F006561BD /* KBCell.swift */,
 				1DB8ED2E2E10355F006561BD /* KBoard.swift */,
-				1DB8ED2F2E10355F006561BD /* KBUser.swift */,
-				1D0F907C2E35F49C000AC5FF /* KBTitle.swift */,
 			);
 			path = KanbanBoardModel;
 			sourceTree = "<group>";
@@ -134,9 +138,10 @@
 		1DB8ED392E10355F006561BD /* KanbanBoard */ = {
 			isa = PBXGroup;
 			children = (
+				1DB8ED342E10355F006561BD /* Views */,
 				1DB8ED302E10355F006561BD /* KanbanBoardModel */,
 				1DB8ED322E10355F006561BD /* Preview Content */,
-				1DB8ED342E10355F006561BD /* Views */,
+				1DB64EE92E3BFF8300258235 /* Garbage */,
 				1DB8ED352E10355F006561BD /* Assets.xcassets */,
 				1DB8ED372E10355F006561BD /* KanbanBoard.entitlements */,
 				1DB8ED382E10355F006561BD /* KanbanBoardApp.swift */,
@@ -259,7 +264,6 @@
 				1DB8ED402E10355F006561BD /* KBCell.swift in Sources */,
 				1DB8ED492E10356E006561BD /* KBoardID.storage.swift in Sources */,
 				1DEEFF572E2CC65C00C4DE37 /* KBoardView.swift in Sources */,
-				1D0F907D2E35F4A1000AC5FF /* KBTitle.swift in Sources */,
 				1DB8ED422E10355F006561BD /* KBoard.swift in Sources */,
 				1DB8ED432E10355F006561BD /* KBUser.swift in Sources */,
 				1DB8ED442E10355F006561BD /* KBCardView.swift in Sources */,
