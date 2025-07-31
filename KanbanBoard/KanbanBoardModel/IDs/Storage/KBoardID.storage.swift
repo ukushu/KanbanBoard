@@ -22,11 +22,11 @@ extension KBoardID {
         }
     }
     
-    var viewModel : KBoardVM {
-        storage.lazyInit { boardID, _ in
-            KBoardVM(boardID: boardID)
-        }
-    }
+//    var viewModel : KBoardVM {
+//        storage.lazyInit { boardID, _ in
+//            KBoardVM(boardID: boardID)
+//        }
+//    }
 }
 
 

@@ -5,8 +5,8 @@ import Essentials
 
 struct KBoardView: View {
     let projID: ProjID
-    @ObservedObject var model : KBoardVM
-    @ObservedObject var flow: Flow.Document<[String : [KBCardID]]>
+    let kBoardID: KBoardID
+    @ObservedObject var flow  : Flow.Document<[String : [KBCardID]]>
     
     @State var titleEditId: UUID? = nil
     
@@ -15,10 +15,8 @@ struct KBoardView: View {
     init(projID: ProjID) {
         self.projID = projID
         
-        let firstBoard = projID.boardsDocument.content.values.first!
-        
-        self.model = firstBoard.viewModel
-        self.flow = firstBoard.flowCards
+        self.kBoardID = projID.boardsDocument.content.values.first!
+        self.flow = kBoardID.flowCards
     }
     
     var body: some View {
@@ -27,33 +25,39 @@ struct KBoardView: View {
                 Spacer()
                 
                 Button("+ row") {
-                    model.insert(row: "Row \(model.board.rows.count + 1)")
+                    kBoardID.insert(row: "Row \(kBoardID.flowBoard.content.rows.count + 1)")
                 }
                 
                 Button("+ col") {
-                    model.insert(col: "Col \(model.board.columns.count + 1)")
+                    kBoardID.insert(col: "Col \(kBoardID.flowBoard.content.columns.count + 1)")
                 }
-                
                 
                 Spacer()
             }
-            
             
             ScrollView([.horizontal, .vertical], showsIndicators: true) {
                 ZStack {
                     VStack {
                         Space(20)
                         
-                        ForEach(Array(model.board.rows.enumerated()), id: \.element) { idx, title in
-                            RowView(model: model, title: title, titleEditId: $titleEditId)
+                        ForEach(Array(kBoardID.flowBoard.content.rows.enumerated()), id: \.element) { idx, title in
+                            RowView(kBoardID: kBoardID, title: title, titleEditId: $titleEditId)
                         }
+                        
+                        Color.clickableAlpha
+                            .frame(width: 20, height: 15)
+                            .onDrop(of: [.text], delegate: ColDropDelegate(
+                                kBoardID: kBoardID,
+                                current: nil,
+                                draggedId: $titleEditId
+                            ))
                     }
                     
                     HStack {
                         Space(120)
                         
-                        ForEach(Array(model.board.columns.enumerated()), id: \.element) { idx, title in
-                            ColView(model: model, title: title, titleEditId: $titleEditId)
+                        ForEach(Array(kBoardID.flowBoard.content.columns.enumerated()), id: \.element) { idx, title in
+                            ColView(kBoardID: kBoardID, title: title, titleEditId: $titleEditId)
                         }
                     }
                 }
@@ -76,10 +80,10 @@ struct KBoardView: View {
         Color.clickableAlpha
             .frame(width: 100)
         
-        ForEach(Array(model.board.columns.enumerated()), id: \.element) { idx, title in
+        ForEach(Array(kBoardID.flowBoard.content.columns.enumerated()), id: \.element) { idx, title in
             EditableTitle(title, editingId: $titleEditId) { newTitle in
-                if let idx = model.board.columns.firstIndexInt(where: { $0.id == title.id }) {
-                    model.rename(colIdx: idx, to: newTitle)
+                if let idx = kBoardID.flowBoard.content.columns.firstIndexInt(where: { $0.id == title.id }) {
+                    kBoardID.rename(colIdx: idx, to: newTitle)
                 }
             }
             .frame(width: 100)
@@ -89,7 +93,7 @@ struct KBoardView: View {
                 }
                 
                 Button("delete") {
-                    model.remove(colId: title.id)
+                    kBoardID.remove(colId: title.id)
                 }
             }
             .id(title)
@@ -98,50 +102,50 @@ struct KBoardView: View {
                 return NSItemProvider(object: NSString(string: title.id.uuidString))
             }
             .onDrop(of: [.text], delegate: ColDropDelegate(
+                kBoardID: kBoardID,
                 current: title.id,
-                draggedId: $draggedTitle,
-                model: model
+                draggedId: $draggedTitle
             ))
         }
     }
-    
-    @ViewBuilder
-    func BoardRowTitlesAndContentView() -> some View {
-        let rows = model.cells.chunked(by: model.columns.count - 1)
-        
-        ForEach(Array(model.board.rows.enumerated()), id: \.element) { idx, title in
-            EditableTitle(title, editingId: $titleEditId) { newTitle in
-                if let idx = model.board.rows.firstIndexInt(where: { $0.id == title.id }) {
-                    model.rename(rowIdx: idx, to: newTitle)
-                }
-            }
-            .contextMenu {
-                Button("edit") {
-                    titleEditId = title.id
-                }
-                
-                Button("delete") {
-                    model.remove(rowId: title.id)
-                }
-            }
-            .id(title)
-            .onDrag {
-                self.draggedTitle = title.id
-                return NSItemProvider(object: NSString(string: title.id.uuidString))
-            }
-            .onDrop(of: [.text], delegate: RowDropDelegate(
-                current: title.id,
-                draggedId: $draggedTitle,
-                model: model
-            ))
-            
-            if rows.count > 0 {
-                ForEach(rows[idx] ) { cell in
-                    cell.asView()
-                }
-            }
-        }
-    }
+//    
+//    @ViewBuilder
+//    func BoardRowTitlesAndContentView() -> some View {
+//        let rows = model.cells.chunked(by: model.columns.count - 1)
+//        
+//        ForEach(Array(model.board.rows.enumerated()), id: \.element) { idx, title in
+//            EditableTitle(title, editingId: $titleEditId) { newTitle in
+//                if let idx = model.board.rows.firstIndexInt(where: { $0.id == title.id }) {
+//                    model.rename(rowIdx: idx, to: newTitle)
+//                }
+//            }
+//            .contextMenu {
+//                Button("edit") {
+//                    titleEditId = title.id
+//                }
+//                
+//                Button("delete") {
+//                    model.remove(rowId: title.id)
+//                }
+//            }
+//            .id(title)
+//            .onDrag {
+//                self.draggedTitle = title.id
+//                return NSItemProvider(object: NSString(string: title.id.uuidString))
+//            }
+//            .onDrop(of: [.text], delegate: RowDropDelegate(
+//                current: title.id,
+//                draggedId: $draggedTitle,
+//                model: model
+//            ))
+//            
+//            if rows.count > 0 {
+//                ForEach(rows[idx] ) { cell in
+//                    cell.asView()
+//                }
+//            }
+//        }
+//    }
 }
 
 #Preview {
@@ -149,9 +153,10 @@ struct KBoardView: View {
 }
 
 struct ColDropDelegate: DropDelegate {
-    let current: UUID
+    let kBoardID: KBoardID
+    let current: UUID? // nil = дроп в кінець
     @Binding var draggedId: UUID?
-    let model: KBoardVM
+//    let model: KBoardVM
     
     func dropEntered(info: DropInfo) {
         doWork(info: info)
@@ -164,21 +169,23 @@ struct ColDropDelegate: DropDelegate {
     
     func doWork(info: DropInfo) {
         guard let draggedId,
-              let from = model.board.columns.firstIndex(where: { $0.id == draggedId }),
-              let to = model.board.columns.firstIndex(where: { $0.id == current })
+              let from = kBoardID.flowBoard.content.columns.firstIndex(where: { $0.id == draggedId }),
+              let to = current == nil ? kBoardID.flowBoard.content.columns.count : kBoardID.flowBoard.content.columns.firstIndex(where: { $0.id == current })
         else { return }
         
         withAnimation {
-            model.moveCol(from: from, to: to)
+            kBoardID.moveCol(from: from, to: to)
         }
     }
 }
 
 
 struct RowDropDelegate: DropDelegate {
+    let kBoardID: KBoardID
+    
     let current: UUID
     @Binding var draggedId: UUID?
-    let model: KBoardVM
+//    let model: KBoardVM
     
     func performDrop(info: DropInfo) -> Bool {
         doWork(info: info)
@@ -193,27 +200,26 @@ struct RowDropDelegate: DropDelegate {
     
     func doWork(info: DropInfo) {
         guard let draggedId = draggedId,
-              let from = model.board.rows.firstIndex(where: { $0.id == draggedId }),
-              let to = model.board.rows.firstIndex(where: { $0.id == current })
+              let from = kBoardID.flowBoard.content.rows.firstIndex(where: { $0.id == draggedId }),
+              let to   = kBoardID.flowBoard.content.rows.firstIndex(where: { $0.id == current })
         else { return }
         
         withAnimation {
-            model.moveRow(from: from, to: to)
+            kBoardID.moveRow(from: from, to: to)
         }
     }
 }
 
 
 struct RowView: View {
-    @ObservedObject var model : KBoardVM
-    
-    var title: KBTitle
+    let kBoardID: KBoardID
+    var title: TableSection
     
     @Binding var titleEditId: UUID?
     
     var body: some View {
         HStack {
-            BoardTitle(model: model, title: title, titleEditId: $titleEditId)
+            BoardTitle(kBoardID: kBoardID, title: title, titleEditId: $titleEditId)
             
             Spacer()
         }
@@ -224,52 +230,54 @@ struct RowView: View {
 }
 
 struct ColView: View {
-    @ObservedObject var model : KBoardVM
+    let kBoardID : KBoardID
     
-    var title: KBTitle
+    var title: TableSection
     
     @Binding var titleEditId: UUID?
     
     var body: some View {
         VStack {
-            BoardTitle(model: model, title: title, titleEditId: $titleEditId)
+            BoardTitle(kBoardID: kBoardID, title: title, titleEditId: $titleEditId)
+                .onDrag {
+                    self.titleEditId = title.id
+                    return NSItemProvider(object: NSString(string: title.id.uuidString))
+                }
+                .onDrop(of: [.text], delegate: ColDropDelegate(
+                    kBoardID: kBoardID,
+                    current: title.id,
+                    draggedId: $titleEditId
+                ))
             
             Spacer()
         }
         .background {
             Color.yellow.opacity(0.2)
         }
-        .onDrag {
-            self.titleEditId = title.id
-            return NSItemProvider(object: NSString(string: title.id.uuidString))
-        }
-        .onDrop(of: [.text], delegate: ColDropDelegate(
-            current: title.id,
-            draggedId: $titleEditId,
-            model: model
-        ))
     }
 }
 
 struct BoardTitle: View {
-    @ObservedObject var model : KBoardVM
+    let kBoardID : KBoardID
     
-    var title: KBTitle
+    var title: TableSection
     
     @Binding var titleEditId: UUID?
     
     var body: some View {
-        HStack{
+        HStack {
             Spacer()
             
             EditableTitle(title, editingId: $titleEditId) { newTitle in
-                if let idx = model.board.columns.firstIndexInt(where: { $0.id == title.id }) {
-                    model.rename(colIdx: idx, to: newTitle)
+                
+                if let idx = kBoardID.flowBoard.content.columns.firstIndexInt(where: { $0.id == title.id }) {
+                    kBoardID.rename(colIdx: idx, to: newTitle)
                 }
             }
             
             Spacer()
         }
+        .background(Color.clickableAlpha)
         .frame(width: 100)
         .contextMenu {
             Button("edit") {
@@ -277,7 +285,7 @@ struct BoardTitle: View {
             }
             
             Button("delete") {
-                model.remove(colId: title.id)
+                kBoardID.remove(colId: title.id)
             }
         }
         .id(title)
