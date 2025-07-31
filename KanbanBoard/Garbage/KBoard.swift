@@ -40,10 +40,12 @@ extension KBoardID {
     }
     
     func moveCol(from: Int, to: Int) {
+        guard from != to else { return }
         self.document.content.columns.values.move(fromOffsets: IndexSet(integer: from), toOffset: to )
     }
     
     func moveRow(from: Int, to: Int) {
+        guard from != to else { return }
         self.document.content.rows.values.move(fromOffsets: IndexSet(integer: from), toOffset: to )
     }
 }
