@@ -37,15 +37,7 @@ struct KBoardView: View {
                             RowView(kBoardID: kBoardID, titleElem: item.element)
                         }
                         
-                        if godModeVm.inEdit {
-                            HStack {
-                                Button("+") {
-                                    kBoardID.insert(row: "Row \(kBoardID.document.content.rows.count + 1)")
-                                }
-                                
-                                Space()
-                            }
-                        }
+                        AddRowBtn()
                     }
                     
                     HStack {
@@ -55,15 +47,7 @@ struct KBoardView: View {
                             ColView(kBoardID: kBoardID, titleElem: item.element)
                         }
                         
-                        if godModeVm.inEdit {
-                            VStack {
-                                Button("+") {
-                                    kBoardID.insert(col: "Col \(kBoardID.document.content.columns.count + 1)")
-                                }
-                                
-                                Space()
-                            }
-                        }
+                        AddColBtn()
                     }
                 }
             }
@@ -72,39 +56,35 @@ struct KBoardView: View {
     }
 }
 
-struct ColDropDelegate: DropDelegate {
-    let kBoardID: KBoardID
-    let current: UUID? // nil = дроп в кінець
-    @Binding var draggedId: UUID?
-    
-    func dropEntered(info: DropInfo) {
-        doWork(info: info)
-    }
-    
-    func performDrop(info: DropInfo) -> Bool {
-        self.draggedId = nil
-        return true
-    }
-    
-    func doWork(info: DropInfo) {
-        guard let draggedId,
-              let from = kBoardID.document.content.columns.index(forKey: draggedId)
-        else { return }
-        
-        let to: Int
-        if let current {
-            to = kBoardID.document.content.columns.index(forKey: current) ?? kBoardID.document.content.columns.count
-        } else {
-            to = kBoardID.document.content.columns.count
+fileprivate extension KBoardView {
+    @ViewBuilder
+    func AddColBtn() -> some View {
+        if godModeVm.inEdit {
+            VStack {
+                Button("+") {
+                    kBoardID.insert(col: "Col \(kBoardID.document.content.columns.count + 1)")
+                }
+                
+                Space()
+            }
         }
-        
-        withAnimation {
-            kBoardID.moveCol(from: from, to: to)
+    }
+    
+    @ViewBuilder
+    func AddRowBtn() -> some View {
+        if godModeVm.inEdit {
+            HStack {
+                Button("+") {
+                    kBoardID.insert(row: "Row \(kBoardID.document.content.rows.count + 1)")
+                }
+                
+                Space()
+            }
         }
     }
 }
 
-struct RowView: View {
+fileprivate struct RowView: View {
     let kBoardID: KBoardID
     let titleElem: OrderDict<UUID,String>.Element
     var body: some View {
@@ -119,7 +99,7 @@ struct RowView: View {
     }
 }
 
-struct ColView: View {
+fileprivate struct ColView: View {
     let kBoardID : KBoardID
     
     let titleElem: OrderDict<UUID,String>.Element
@@ -136,7 +116,7 @@ struct ColView: View {
     }
 }
 
-struct BoardTitle: View {
+fileprivate struct BoardTitle: View {
     @ObservedObject var godModeVm = GodModeVM.shared
     
     let isVert: Bool
