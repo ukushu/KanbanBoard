@@ -62,15 +62,6 @@ struct KBoardView: View {
                     }
                 }
             }
-            
-            
-//            ScrollView([.horizontal, .vertical], showsIndicators: true) {
-//                LazyVGrid(columns: model.columns, spacing: 7) {
-//                    BoardColTitlesView()
-//                    
-//                    BoardRowTitlesAndContentView()
-//                }
-//            }
         }
         .padding()
     }
@@ -108,44 +99,6 @@ struct KBoardView: View {
             ))
         }
     }
-//    
-//    @ViewBuilder
-//    func BoardRowTitlesAndContentView() -> some View {
-//        let rows = model.cells.chunked(by: model.columns.count - 1)
-//        
-//        ForEach(Array(model.board.rows.enumerated()), id: \.element) { idx, title in
-//            EditableTitle(title, editingId: $titleEditId) { newTitle in
-//                if let idx = model.board.rows.firstIndexInt(where: { $0.id == title.id }) {
-//                    model.rename(rowIdx: idx, to: newTitle)
-//                }
-//            }
-//            .contextMenu {
-//                Button("edit") {
-//                    titleEditId = title.id
-//                }
-//                
-//                Button("delete") {
-//                    model.remove(rowId: title.id)
-//                }
-//            }
-//            .id(title)
-//            .onDrag {
-//                self.draggedTitle = title.id
-//                return NSItemProvider(object: NSString(string: title.id.uuidString))
-//            }
-//            .onDrop(of: [.text], delegate: RowDropDelegate(
-//                current: title.id,
-//                draggedId: $draggedTitle,
-//                model: model
-//            ))
-//            
-//            if rows.count > 0 {
-//                ForEach(rows[idx] ) { cell in
-//                    cell.asView()
-//                }
-//            }
-//        }
-//    }
 }
 
 #Preview {
