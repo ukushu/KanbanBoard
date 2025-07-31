@@ -1,5 +1,6 @@
 
 import SwiftUI
+import MoreSwiftUI
 import Essentials
 
 struct KBoardView: View {
@@ -37,13 +38,35 @@ struct KBoardView: View {
                 Spacer()
             }
             
+            
             ScrollView([.horizontal, .vertical], showsIndicators: true) {
-                LazyVGrid(columns: model.columns, spacing: 7) {
-                    BoardColTitlesView()
+                ZStack {
+                    VStack {
+                        Space(20)
+                        
+                        ForEach(Array(model.board.rows.enumerated()), id: \.element) { idx, title in
+                            RowView(model: model, title: title, titleEditId: $titleEditId)
+                        }
+                    }
                     
-                    BoardRowTitlesAndContentView()
+                    HStack {
+                        Space(120)
+                        
+                        ForEach(Array(model.board.columns.enumerated()), id: \.element) { idx, title in
+                            ColView(model: model, title: title, titleEditId: $titleEditId)
+                        }
+                    }
                 }
             }
+            
+            
+//            ScrollView([.horizontal, .vertical], showsIndicators: true) {
+//                LazyVGrid(columns: model.columns, spacing: 7) {
+//                    BoardColTitlesView()
+//                    
+//                    BoardRowTitlesAndContentView()
+//                }
+//            }
         }
         .padding()
     }
@@ -177,5 +200,86 @@ struct RowDropDelegate: DropDelegate {
         withAnimation {
             model.moveRow(from: from, to: to)
         }
+    }
+}
+
+
+struct RowView: View {
+    @ObservedObject var model : KBoardVM
+    
+    var title: KBTitle
+    
+    @Binding var titleEditId: UUID?
+    
+    var body: some View {
+        HStack {
+            BoardTitle(model: model, title: title, titleEditId: $titleEditId)
+            
+            Spacer()
+        }
+        .background {
+            Color.blue.opacity(0.2)
+        }
+    }
+}
+
+struct ColView: View {
+    @ObservedObject var model : KBoardVM
+    
+    var title: KBTitle
+    
+    @Binding var titleEditId: UUID?
+    
+    var body: some View {
+        VStack {
+            BoardTitle(model: model, title: title, titleEditId: $titleEditId)
+            
+            Spacer()
+        }
+        .background {
+            Color.yellow.opacity(0.2)
+        }
+        .onDrag {
+            self.titleEditId = title.id
+            return NSItemProvider(object: NSString(string: title.id.uuidString))
+        }
+        .onDrop(of: [.text], delegate: ColDropDelegate(
+            current: title.id,
+            draggedId: $titleEditId,
+            model: model
+        ))
+    }
+}
+
+struct BoardTitle: View {
+    @ObservedObject var model : KBoardVM
+    
+    var title: KBTitle
+    
+    @Binding var titleEditId: UUID?
+    
+    var body: some View {
+        HStack{
+            Spacer()
+            
+            EditableTitle(title, editingId: $titleEditId) { newTitle in
+                if let idx = model.board.columns.firstIndexInt(where: { $0.id == title.id }) {
+                    model.rename(colIdx: idx, to: newTitle)
+                }
+            }
+            
+            Spacer()
+        }
+        .frame(width: 100)
+        .contextMenu {
+            Button("edit") {
+                titleEditId = title.id
+            }
+            
+            Button("delete") {
+                model.remove(colId: title.id)
+            }
+        }
+        .id(title)
     }
 }
