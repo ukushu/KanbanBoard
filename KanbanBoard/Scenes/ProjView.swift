@@ -19,8 +19,6 @@ struct ProjView: View {
             projID.boardsListDocument.content[UUID()] = kBoardID
             self.kBoardID = kBoardID
         }
-        
-        
     }
     
     var body: some View {

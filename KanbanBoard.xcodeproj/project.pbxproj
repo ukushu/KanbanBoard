@@ -113,9 +113,9 @@
 		1DB64EEC2E3C034200258235 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				1DB64EED2E3C035A00258235 /* HelperViews */,
 				1DB8ED362E10355F006561BD /* ProjView.swift */,
 				1DEEFF562E2CC65800C4DE37 /* KBoardView.swift */,
+				1DB64EED2E3C035A00258235 /* HelperViews */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
