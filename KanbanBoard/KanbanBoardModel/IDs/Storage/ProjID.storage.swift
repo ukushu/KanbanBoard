@@ -7,9 +7,9 @@ import OrderedCollections
 typealias ProjID = Flow.ProjectID
 
 extension Flow.ProjectID {
-    var boardsDocument : Flow.Document<OrderDict<UUID,KBoardID>> {
+    var boardsListDocument : Flow.Document<OrderDict<UUID,KBoardID>> {
         storage.lazyInit { projID, pool in
-            Flow.Document(jsonURL: projID.usersListUrl, defaultContent: [UUID(): KBoardID(projID: projID) ], errors: pool)
+            Flow.Document(jsonURL: projID.boardsListUrl, defaultContent: [UUID(): KBoardID(projID: projID) ], errors: pool)
         }
     }
     
@@ -27,5 +27,6 @@ extension Flow.ProjectID {
         return Flow.ProjectID(url: a)
     }
     
+    var boardsListUrl : URL   { self.url.appendingPathComponent("KanbanBoardList.txt") }
     var usersListUrl : URL    { self.url.appendingPathComponent("KanbanBoardUsersList.txt") }
 }
