@@ -12,8 +12,8 @@ struct KBoardID : Hashable, Identifiable, Codable {
 }
 
 extension KBoardID {
-    var kBoardUrl: URL                { self.projID.url.appendingPathComponent("\(self.id)_kBoard.txt") }
-    var kBoardCardsUrl: URL           { self.projID.url.appendingPathComponent("\(self.id)_kBoardCards.txt") }
+    var url: URL                { self.projID.url.appendingPathComponent("\(self.id)_kBoard.txt") }
+    var cardsUrl: URL           { self.projID.url.appendingPathComponent("\(self.id)_kBoardCards.txt") }
 }
 
 extension Flow.ProjectID {

@@ -12,13 +12,13 @@ extension KBoardID {
     
     var flowBoard : Flow.Document<KBoard> {
         return storage.lazyInit { boardID, pool in
-            Flow.Document(jsonURL: boardID.kBoardUrl, defaultContent: KBoard(), errors: pool)
+            Flow.Document(jsonURL: boardID.url, defaultContent: KBoard(), errors: pool)
         }
     }
     
     var flowCards : Flow.Document<[String: [KBCardID]]> {
         return storage.lazyInit { boardID, pool in
-            Flow.Document(jsonURL: boardID.kBoardCardsUrl, defaultContent: [:], errors: pool)
+            Flow.Document(jsonURL: boardID.cardsUrl, defaultContent: [:], errors: pool)
         }
     }
     
