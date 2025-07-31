@@ -4,7 +4,7 @@ import Essentials
 
 struct ProjView: View {
     let projID: ProjID
-    @ObservedObject var boardsListDocument : Flow.Document<OrderDict<UUID,KBoardID>>
+    @ObservedObject var boardsListDocument : Flow.Document<[UUID]>
     
     let kBoardID: KBoardID
     
@@ -12,11 +12,11 @@ struct ProjView: View {
         self.projID = projID
         self.boardsListDocument = projID.boardsListDocument
         
-        if let kBoardID = projID.boardsListDocument.content.values.first {
-            self.kBoardID = kBoardID
+        if let uuidBoardId = projID.boardsListDocument.content.first {
+            self.kBoardID = KBoardID(projID: projID, uuid: uuidBoardId)
         } else {
             let kBoardID = KBoardID(projID: projID)
-            projID.boardsListDocument.content[UUID()] = kBoardID
+            projID.boardsListDocument.content = [kBoardID.id]
             self.kBoardID = kBoardID
         }
     }
