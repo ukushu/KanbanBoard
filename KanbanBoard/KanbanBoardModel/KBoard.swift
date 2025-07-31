@@ -20,31 +20,31 @@ class KBoardDropTargets {
 
 extension KBoardID {
     func insert(row: String) {
-        self.flowBoard.content.rows[UUID()] = row
+        self.document.content.rows[UUID()] = row
     }
     
     func insert(col: String) {
-        self.flowBoard.content.columns[UUID()] = col
+        self.document.content.columns[UUID()] = col
     }
     
     func remove(rowId: UUID) {
-        if let idx = self.flowBoard.content.rows.index(forKey: rowId) {
-            self.flowBoard.content.rows.remove(at: idx)
+        if let idx = self.document.content.rows.index(forKey: rowId) {
+            self.document.content.rows.remove(at: idx)
         }
     }
     
     func remove(colId: UUID) {
-        if let idx = self.flowBoard.content.columns.index(forKey: colId) {
-            self.flowBoard.content.columns.remove(at: idx)
+        if let idx = self.document.content.columns.index(forKey: colId) {
+            self.document.content.columns.remove(at: idx)
         }
     }
     
     func moveCol(from: Int, to: Int) {
-        self.flowBoard.content.columns.values.move(fromOffsets: IndexSet(integer: from), toOffset: to )
+        self.document.content.columns.values.move(fromOffsets: IndexSet(integer: from), toOffset: to )
     }
     
     func moveRow(from: Int, to: Int) {
-        self.flowBoard.content.rows.values.move(fromOffsets: IndexSet(integer: from), toOffset: to )
+        self.document.content.rows.values.move(fromOffsets: IndexSet(integer: from), toOffset: to )
     }
 }
 

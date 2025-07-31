@@ -12,7 +12,7 @@ struct KBCell: Codable {
     var hPos: Int
     var id: String { "\(wPos)x\(hPos)" }
     
-    var cards: [KBCardID] { self.boardID.flowCards.content[self.id] ?? [] }
+    var cards: [KBCardID] { self.boardID.documentCards.content[self.id] ?? [] }
     
     var color: Color { wPos % 2 == 0 ? .yellow : .blue }
 }

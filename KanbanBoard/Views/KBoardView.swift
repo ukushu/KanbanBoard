@@ -16,7 +16,7 @@ struct KBoardView: View {
         self.projID = projID
         
         self.kBoardID = projID.boardsDocument.content.values.first!
-        self.flow = kBoardID.flowCards
+        self.flow = kBoardID.documentCards
     }
     
     var body: some View {
@@ -25,11 +25,11 @@ struct KBoardView: View {
                 Spacer()
                 
                 Button("+ row") {
-                    kBoardID.insert(row: "Row \(kBoardID.flowBoard.content.rows.count + 1)")
+                    kBoardID.insert(row: "Row \(kBoardID.document.content.rows.count + 1)")
                 }
                 
                 Button("+ col") {
-                    kBoardID.insert(col: "Col \(kBoardID.flowBoard.content.columns.count + 1)")
+                    kBoardID.insert(col: "Col \(kBoardID.document.content.columns.count + 1)")
                 }
                 
                 Spacer()
@@ -40,7 +40,7 @@ struct KBoardView: View {
                     VStack {
                         Space(20)
                         
-                        ForEach(Array(kBoardID.flowBoard.content.rows.enumerated()), id: \.element.key ) { item in
+                        ForEach(Array(kBoardID.document.content.rows.enumerated()), id: \.element.key ) { item in
                             RowView(kBoardID: kBoardID, titleElem: item.element, titleEditId: $titleEditId)
                         }
                         
@@ -56,7 +56,7 @@ struct KBoardView: View {
                     HStack {
                         Space(120)
                         
-                        ForEach(Array(kBoardID.flowBoard.content.columns.enumerated()), id: \.element.key ) { item in
+                        ForEach(Array(kBoardID.document.content.columns.enumerated()), id: \.element.key ) { item in
                             ColView(kBoardID: kBoardID, titleElem: item.element, titleEditId: $titleEditId)
                         }
                     }
@@ -71,9 +71,9 @@ struct KBoardView: View {
         Color.clickableAlpha
             .frame(width: 100)
         
-        ForEach(Array(kBoardID.flowBoard.content.columns.enumerated()), id: \.element.key ) { item in
+        ForEach(Array(kBoardID.document.content.columns.enumerated()), id: \.element.key ) { item in
             EditableTitle(item.element, editingId: $titleEditId) { newTitle in
-                kBoardID.flowBoard.content.columns[item.element.key] = newTitle
+                kBoardID.document.content.columns[item.element.key] = newTitle
             }
             .frame(width: 100)
             .contextMenu {
@@ -119,14 +119,14 @@ struct ColDropDelegate: DropDelegate {
     
     func doWork(info: DropInfo) {
         guard let draggedId,
-              let from = kBoardID.flowBoard.content.columns.index(forKey: draggedId)
+              let from = kBoardID.document.content.columns.index(forKey: draggedId)
         else { return }
         
         let to: Int
         if let current {
-            to = kBoardID.flowBoard.content.columns.index(forKey: current) ?? kBoardID.flowBoard.content.columns.count
+            to = kBoardID.document.content.columns.index(forKey: current) ?? kBoardID.document.content.columns.count
         } else {
-            to = kBoardID.flowBoard.content.columns.count
+            to = kBoardID.document.content.columns.count
         }
         
         withAnimation {
@@ -229,7 +229,7 @@ struct BoardTitle: View {
             Spacer()
             
             EditableTitle(titleElem, editingId: $titleEditId) { newTitle in
-                kBoardID.flowBoard.content.columns[titleElem.key] = newTitle
+                kBoardID.document.content.columns[titleElem.key] = newTitle
             }
             
             Spacer()

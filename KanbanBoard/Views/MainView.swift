@@ -10,7 +10,7 @@ struct MainView: View {
     
     init(kBoardID: KBoardID) {
         self.kBoardID = kBoardID
-        self.model = kBoardID.projID.boardsDocument.content.values.first!.flowBoard
+        self.model = kBoardID.projID.boardsDocument.content.values.first!.document
     }
     
     @State private var fieldFrame: CGRect = .zero
