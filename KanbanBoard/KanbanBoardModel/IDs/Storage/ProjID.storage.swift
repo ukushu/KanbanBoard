@@ -5,7 +5,6 @@ import SwiftUI
 import OrderedCollections
 
 typealias ProjID = Flow.ProjectID
-typealias OrderDict = OrderedDictionary
 
 extension Flow.ProjectID {
     var boardsDocument : Flow.Document<OrderDict<UUID,KBoardID>> {

@@ -1,10 +1,13 @@
 
 import SwiftUI
 import Essentials
+import OrderedCollections
+
+typealias OrderDict = OrderedDictionary
 
 struct KBoard: Codable {
-    var columns: [TableSection] = []
-    var rows: [TableSection] = []
+    var columns: OrderDict<UUID,String> = [:]
+    var rows :   OrderDict<UUID,String> = [:]
 }
 
 class KBoardDropTargets {
@@ -17,39 +20,31 @@ class KBoardDropTargets {
 
 extension KBoardID {
     func insert(row: String) {
-        self.flowBoard.content.rows.append( TableSection(title: row) )
+        self.flowBoard.content.rows[UUID()] = row
     }
     
     func insert(col: String) {
-        self.flowBoard.content.columns.append( TableSection(title: col) )
+        self.flowBoard.content.columns[UUID()] = col
     }
     
     func remove(rowId: UUID) {
-        if let idx = self.flowBoard.content.rows.firstIndex(where: { $0.id == rowId }) {
+        if let idx = self.flowBoard.content.rows.index(forKey: rowId) {
             self.flowBoard.content.rows.remove(at: idx)
         }
     }
     
     func remove(colId: UUID) {
-        if let idx = self.flowBoard.content.columns.firstIndex(where: { $0.id == colId }) {
+        if let idx = self.flowBoard.content.columns.index(forKey: colId) {
             self.flowBoard.content.columns.remove(at: idx)
         }
     }
     
-    func rename(colIdx: Int, to newTitle: String) {
-        self.flowBoard.content.columns[colIdx].title = newTitle
-    }
-    
-    func rename(rowIdx: Int, to newTitle: String) {
-        self.flowBoard.content.rows[rowIdx].title = newTitle
-    }
-    
     func moveCol(from: Int, to: Int) {
-        self.flowBoard.content.columns.move(fromOffsets: IndexSet(integer: from), toOffset: to )
+        self.flowBoard.content.columns.values.move(fromOffsets: IndexSet(integer: from), toOffset: to )
     }
     
     func moveRow(from: Int, to: Int) {
-        self.flowBoard.content.rows.move(fromOffsets: IndexSet(integer: from), toOffset: to )
+        self.flowBoard.content.rows.values.move(fromOffsets: IndexSet(integer: from), toOffset: to )
     }
 }
 

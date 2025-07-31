@@ -40,8 +40,8 @@ struct KBoardView: View {
                     VStack {
                         Space(20)
                         
-                        ForEach(Array(kBoardID.flowBoard.content.rows.enumerated()), id: \.element) { idx, title in
-                            RowView(kBoardID: kBoardID, title: title, titleEditId: $titleEditId)
+                        ForEach(Array(kBoardID.flowBoard.content.rows.enumerated()), id: \.element.key ) { item in
+                            RowView(kBoardID: kBoardID, titleElem: item.element, titleEditId: $titleEditId)
                         }
                         
                         Color.clickableAlpha
@@ -56,8 +56,8 @@ struct KBoardView: View {
                     HStack {
                         Space(120)
                         
-                        ForEach(Array(kBoardID.flowBoard.content.columns.enumerated()), id: \.element) { idx, title in
-                            ColView(kBoardID: kBoardID, title: title, titleEditId: $titleEditId)
+                        ForEach(Array(kBoardID.flowBoard.content.columns.enumerated()), id: \.element.key ) { item in
+                            ColView(kBoardID: kBoardID, titleElem: item.element, titleEditId: $titleEditId)
                         }
                     }
                 }
@@ -71,30 +71,28 @@ struct KBoardView: View {
         Color.clickableAlpha
             .frame(width: 100)
         
-        ForEach(Array(kBoardID.flowBoard.content.columns.enumerated()), id: \.element) { idx, title in
-            EditableTitle(title, editingId: $titleEditId) { newTitle in
-                if let idx = kBoardID.flowBoard.content.columns.firstIndexInt(where: { $0.id == title.id }) {
-                    kBoardID.rename(colIdx: idx, to: newTitle)
-                }
+        ForEach(Array(kBoardID.flowBoard.content.columns.enumerated()), id: \.element.key ) { item in
+            EditableTitle(item.element, editingId: $titleEditId) { newTitle in
+                kBoardID.flowBoard.content.columns[item.element.key] = newTitle
             }
             .frame(width: 100)
             .contextMenu {
                 Button("edit") {
-                    titleEditId = title.id
+                    titleEditId = item.element.key
                 }
                 
                 Button("delete") {
-                    kBoardID.remove(colId: title.id)
+                    kBoardID.remove(colId: item.element.key)
                 }
             }
-            .id(title)
+            .id(item.element.value)
             .onDrag {
-                self.draggedTitle = title.id
-                return NSItemProvider(object: NSString(string: title.id.uuidString))
+                self.draggedTitle = item.element.key
+                return NSItemProvider(object: NSString(string: item.element.key.uuidString))
             }
             .onDrop(of: [.text], delegate: ColDropDelegate(
                 kBoardID: kBoardID,
-                current: title.id,
+                current: item.element.key,
                 draggedId: $draggedTitle
             ))
         }
@@ -109,7 +107,6 @@ struct ColDropDelegate: DropDelegate {
     let kBoardID: KBoardID
     let current: UUID? // nil = дроп в кінець
     @Binding var draggedId: UUID?
-//    let model: KBoardVM
     
     func dropEntered(info: DropInfo) {
         doWork(info: info)
@@ -122,9 +119,15 @@ struct ColDropDelegate: DropDelegate {
     
     func doWork(info: DropInfo) {
         guard let draggedId,
-              let from = kBoardID.flowBoard.content.columns.firstIndex(where: { $0.id == draggedId }),
-              let to = current == nil ? kBoardID.flowBoard.content.columns.count : kBoardID.flowBoard.content.columns.firstIndex(where: { $0.id == current })
+              let from = kBoardID.flowBoard.content.columns.index(forKey: draggedId)
         else { return }
+        
+        let to: Int
+        if let current {
+            to = kBoardID.flowBoard.content.columns.index(forKey: current) ?? kBoardID.flowBoard.content.columns.count
+        } else {
+            to = kBoardID.flowBoard.content.columns.count
+        }
         
         withAnimation {
             kBoardID.moveCol(from: from, to: to)
@@ -132,47 +135,51 @@ struct ColDropDelegate: DropDelegate {
     }
 }
 
-
-struct RowDropDelegate: DropDelegate {
-    let kBoardID: KBoardID
-    
-    let current: UUID
-    @Binding var draggedId: UUID?
-//    let model: KBoardVM
-    
-    func performDrop(info: DropInfo) -> Bool {
-        doWork(info: info)
-        
-        self.draggedId = nil
-        return true
-    }
-    
-    func dropEntered(info: DropInfo) {
-        doWork(info: info)
-    }
-    
-    func doWork(info: DropInfo) {
-        guard let draggedId = draggedId,
-              let from = kBoardID.flowBoard.content.rows.firstIndex(where: { $0.id == draggedId }),
-              let to   = kBoardID.flowBoard.content.rows.firstIndex(where: { $0.id == current })
-        else { return }
-        
-        withAnimation {
-            kBoardID.moveRow(from: from, to: to)
-        }
-    }
-}
-
+//struct RowDropDelegate: DropDelegate {
+//    let kBoardID: KBoardID
+//    
+//    let current: UUID
+//    @Binding var draggedId: UUID?
+//    
+//    func performDrop(info: DropInfo) -> Bool {
+//        doWork(info: info)
+//        
+//        self.draggedId = nil
+//        return true
+//    }
+//    
+//    func dropEntered(info: DropInfo) {
+//        doWork(info: info)
+//    }
+//    
+//    func doWork(info: DropInfo) {
+//        guard let draggedId = draggedId,
+//              let from = kBoardID.flowBoard.content.rows.keys.firstIndex(of: draggedId),
+//        else { return }
+//        
+//        let to: Int
+//        if let current {
+//            to = kBoardID.flowBoard.content.rows.values.index(forKey: current) ?? kBoardID.flowBoard.content.columns.count
+//        } else {
+//            to = kBoardID.flowBoard.content.rows.count
+//        }
+//        
+//        
+//        withAnimation {
+//            kBoardID.moveRow(from: from, to: to)
+//        }
+//    }
+//}
 
 struct RowView: View {
     let kBoardID: KBoardID
-    var title: TableSection
+    let titleElem: OrderDict<UUID,String>.Element
     
     @Binding var titleEditId: UUID?
     
     var body: some View {
         HStack {
-            BoardTitle(kBoardID: kBoardID, title: title, titleEditId: $titleEditId)
+            BoardTitle(kBoardID: kBoardID, titleElem: titleElem, titleEditId: $titleEditId)
             
             Spacer()
         }
@@ -185,20 +192,20 @@ struct RowView: View {
 struct ColView: View {
     let kBoardID : KBoardID
     
-    var title: TableSection
+    let titleElem: OrderDict<UUID,String>.Element
     
     @Binding var titleEditId: UUID?
     
     var body: some View {
         VStack {
-            BoardTitle(kBoardID: kBoardID, title: title, titleEditId: $titleEditId)
+            BoardTitle(kBoardID: kBoardID, titleElem: titleElem, titleEditId: $titleEditId)
                 .onDrag {
-                    self.titleEditId = title.id
-                    return NSItemProvider(object: NSString(string: title.id.uuidString))
+                    self.titleEditId = titleElem.key
+                    return NSItemProvider(object: NSString(string: titleElem.key.uuidString))
                 }
                 .onDrop(of: [.text], delegate: ColDropDelegate(
                     kBoardID: kBoardID,
-                    current: title.id,
+                    current: titleElem.key,
                     draggedId: $titleEditId
                 ))
             
@@ -213,7 +220,7 @@ struct ColView: View {
 struct BoardTitle: View {
     let kBoardID : KBoardID
     
-    var title: TableSection
+    let titleElem: OrderDict<UUID,String>.Element
     
     @Binding var titleEditId: UUID?
     
@@ -221,11 +228,8 @@ struct BoardTitle: View {
         HStack {
             Spacer()
             
-            EditableTitle(title, editingId: $titleEditId) { newTitle in
-                
-                if let idx = kBoardID.flowBoard.content.columns.firstIndexInt(where: { $0.id == title.id }) {
-                    kBoardID.rename(colIdx: idx, to: newTitle)
-                }
+            EditableTitle(titleElem, editingId: $titleEditId) { newTitle in
+                kBoardID.flowBoard.content.columns[titleElem.key] = newTitle
             }
             
             Spacer()
@@ -234,13 +238,13 @@ struct BoardTitle: View {
         .frame(width: 100)
         .contextMenu {
             Button("edit") {
-                titleEditId = title.id
+                titleEditId = titleElem.key
             }
             
             Button("delete") {
-                kBoardID.remove(colId: title.id)
+                kBoardID.remove(colId: titleElem.key)
             }
         }
-        .id(title)
+        .id(titleElem.value)
     }
 }
