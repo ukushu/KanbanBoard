@@ -69,3 +69,9 @@ struct KBoardView: View {
 }
 ```
 
+4) Якщо потрібна анімація - ми можемо повісити анімацію на конкретний елемент прив'язавшись до конкретного поля через value:
+
+```
+ColumnsListView()
+    .animation(.default, value: kBoardID.document.content.columns)
+```
