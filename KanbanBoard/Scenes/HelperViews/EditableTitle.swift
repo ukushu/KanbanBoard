@@ -1,4 +1,6 @@
+
 import SwiftUI
+import MoreSwiftUI
 
 struct TableSection: Codable, Identifiable, Hashable {
     var id: UUID = UUID()
@@ -17,12 +19,16 @@ public struct EditableTitle: View {
     
     let isCol: Bool
     
-    init(kBoardID: KBoardID, isCol: Bool, title: OrderDict<UUID,String>.Element, onEditEnd: @escaping (String) -> Void) {
+    @State var color: Color
+    
+    init(kBoardID: KBoardID, title: OrderDict<UUID,String>.Element, isCol: Bool, onEditEnd: @escaping (String) -> Void) {
         self.kBoardID = kBoardID
         self.isCol = isCol
         self.titleElem = title
         newValue = title.value
         self.onEditEnd = onEditEnd
+        
+        self.color = kBoardID.document.content.colors[title.key] ?? (isCol ? Color(hex: 0xf9d84a) : Color(hex: 0x3b82f7) )
     }
     
     @ViewBuilder
@@ -46,6 +52,9 @@ public struct EditableTitle: View {
         }
         .onExitCommand {
             newValue = titleElem.value
+        }
+        .onChange(of: color) {
+            kBoardID.document.content.colors[titleElem.key] = color
         }
     }
     
@@ -86,10 +95,14 @@ public struct EditableTitle: View {
             if isCol {
                 HStack( spacing: 2) {
                     view
+                    
+                    UksColorPicker(color: $color).frame(width: 10, height: 10)
                 }
             } else {
                 VStack( spacing: 0) {
                     view
+                    
+                    UksColorPicker(color: $color).frame(width: 10, height: 10)
                 }
             }
         }

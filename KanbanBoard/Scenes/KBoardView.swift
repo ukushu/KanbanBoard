@@ -88,33 +88,49 @@ fileprivate extension KBoardView {
 
 fileprivate struct RowView: View {
     let kBoardID: KBoardID
+    @ObservedObject var document : Flow.Document<KBoard>
+    
     let titleElem: OrderDict<UUID,String>.Element
+    
+    init(kBoardID: KBoardID, titleElem: OrderDict<UUID, String>.Element) {
+        self.kBoardID = kBoardID
+        self.document = kBoardID.document
+        self.titleElem = titleElem
+    }
     
     var body: some View {
         HStack {
-            BoardTitle(isCol: false, kBoardID: kBoardID, titleElem: titleElem)
+            BoardTitle(kBoardID: kBoardID, titleElem: titleElem, isCol: false)
             
             Spacer()
         }
         .background {
-            Color.blue.opacity(0.2)
+            (kBoardID.document.content.colors[titleElem.key] ?? Color.blue).opacity(0.2)
         }
     }
 }
 
 fileprivate struct ColView: View {
     let kBoardID : KBoardID
+    @ObservedObject var document : Flow.Document<KBoard>
     
     let titleElem: OrderDict<UUID,String>.Element
     
+    init(kBoardID: KBoardID, titleElem: OrderDict<UUID, String>.Element) {
+        self.kBoardID = kBoardID
+        self.document = kBoardID.document
+        
+        self.titleElem = titleElem
+    }
+    
     var body: some View {
         VStack {
-            BoardTitle(isCol: true, kBoardID: kBoardID, titleElem: titleElem)
+            BoardTitle(kBoardID: kBoardID, titleElem: titleElem, isCol: true)
             
             Spacer()
         }
         .background {
-            Color.yellow.opacity(0.2)
+            (kBoardID.document.content.colors[titleElem.key] ?? Color.yellow).opacity(0.2)
         }
     }
 }
@@ -122,21 +138,19 @@ fileprivate struct ColView: View {
 fileprivate struct BoardTitle: View {
     @ObservedObject var godModeVm = GodModeVM.shared
     
-    let isCol: Bool
     let kBoardID : KBoardID
     let titleElem: OrderDict<UUID,String>.Element
+    let isCol: Bool
     
     var body: some View {
-        HStack {
-            EditableTitle(kBoardID: kBoardID, isCol: isCol, title: titleElem) { newTitle in
-                if isCol {
-                    if let _ = kBoardID.document.content.columns[titleElem.key] {
-                        kBoardID.document.content.columns[titleElem.key] = newTitle
-                    }
-                } else {
-                    if let _ = kBoardID.document.content.rows[titleElem.key] {
-                        kBoardID.document.content.rows[titleElem.key] = newTitle
-                    }
+        EditableTitle(kBoardID: kBoardID, title: titleElem, isCol: isCol) { newTitle in
+            if isCol {
+                if let _ = kBoardID.document.content.columns[titleElem.key] {
+                    kBoardID.document.content.columns[titleElem.key] = newTitle
+                }
+            } else {
+                if let _ = kBoardID.document.content.rows[titleElem.key] {
+                    kBoardID.document.content.rows[titleElem.key] = newTitle
                 }
             }
         }
