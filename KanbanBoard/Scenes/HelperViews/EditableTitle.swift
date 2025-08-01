@@ -99,8 +99,10 @@ public struct EditableTitle: View {
                     UksColorPicker(color: $color).frame(width: 10, height: 10)
                 }
             } else {
-                VStack( spacing: 0) {
-                    view
+                HStack(spacing: 3) {
+                    VStack( spacing: 0) {
+                        view
+                    }
                     
                     UksColorPicker(color: $color).frame(width: 10, height: 10)
                 }
