@@ -39,6 +39,7 @@ struct KBoardView: View {
                         
                         AddRowBtn()
                     }
+                    .animation(.default, value: kBoardID.document.content.rows)
                     
                     HStack {
                         Space(120)
@@ -49,6 +50,7 @@ struct KBoardView: View {
                         
                         AddColBtn()
                     }
+                    .animation(.default, value: kBoardID.document.content.columns)
                 }
             }
         }

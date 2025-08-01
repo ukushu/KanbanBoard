@@ -93,5 +93,6 @@ public struct EditableTitle: View {
                 }
             }
         }
+        .cursor(.pointingHand)
     }
 }
