@@ -129,7 +129,15 @@ fileprivate struct BoardTitle: View {
     var body: some View {
         HStack {
             EditableTitle(kBoardID: kBoardID, isCol: isCol, title: titleElem) { newTitle in
-                kBoardID.document.content.columns[titleElem.key] = newTitle
+                if isCol {
+                    if let _ = kBoardID.document.content.columns[titleElem.key] {
+                        kBoardID.document.content.columns[titleElem.key] = newTitle
+                    }
+                } else {
+                    if let _ = kBoardID.document.content.rows[titleElem.key] {
+                        kBoardID.document.content.rows[titleElem.key] = newTitle
+                    }
+                }
             }
         }
         .background(Color.clickableAlpha)
@@ -137,7 +145,11 @@ fileprivate struct BoardTitle: View {
         .if(godModeVm.inEdit) {
             $0.contextMenu {
                 Button("delete") {
-                    kBoardID.remove(colId: titleElem.key)
+                    if isCol {
+                        kBoardID.remove(colId: titleElem.key)
+                    } else {
+                        kBoardID.remove(rowId: titleElem.key)
+                    }
                 }
             }
         }

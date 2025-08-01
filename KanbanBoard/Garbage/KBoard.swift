@@ -6,8 +6,9 @@ import OrderedCollections
 typealias OrderDict = OrderedDictionary
 
 struct KBoard: Codable {
-    var columns: OrderDict<UUID,String> = [:]
-    var rows :   OrderDict<UUID,String> = [:]
+    var columns: OrderDict<UUID, String> = [:]
+    var rows   : OrderDict<UUID, String> = [:]
+    var colors: [UUID: Color] = [:]
 }
 
 class KBoardDropTargets {
@@ -28,15 +29,11 @@ extension KBoardID {
     }
     
     func remove(rowId: UUID) {
-        if let idx = self.document.content.rows.index(forKey: rowId) {
-            self.document.content.rows.remove(at: idx)
-        }
+        self.document.content.rows[rowId] = nil
     }
     
     func remove(colId: UUID) {
-        if let idx = self.document.content.columns.index(forKey: colId) {
-            self.document.content.columns.remove(at: idx)
-        }
+        self.document.content.columns[colId] = nil
     }
     
     func moveCol(from: Int, to: Int) {
