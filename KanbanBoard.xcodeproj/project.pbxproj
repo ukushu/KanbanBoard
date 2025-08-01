@@ -45,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		1D0F907F2E360403000AC5FF /* EditableTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTitle.swift; sourceTree = "<group>"; };
+		1DB64EEE2E3CCB3C00258235 /* SwiftFlowTutor.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = SwiftFlowTutor.md; sourceTree = "<group>"; };
 		1DB8ED262E10355F006561BD /* KBCardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBCardID.swift; sourceTree = "<group>"; };
 		1DB8ED272E10355F006561BD /* KBoardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBoardID.swift; sourceTree = "<group>"; };
 		1DB8ED282E10355F006561BD /* KBUserID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBUserID.swift; sourceTree = "<group>"; };
@@ -153,6 +154,7 @@
 		1DEB79D72DC96513006B6059 = {
 			isa = PBXGroup;
 			children = (
+				1DB64EEE2E3CCB3C00258235 /* SwiftFlowTutor.md */,
 				1DB8ED392E10355F006561BD /* KanbanBoard */,
 				1DEB79E12DC96513006B6059 /* Products */,
 			);

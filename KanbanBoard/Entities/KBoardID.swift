@@ -1,7 +1,6 @@
 import Foundation
 import Essentials
 
-
 // must not be codable!
 struct KBoardID : Hashable, Identifiable {
     public let projID: Flow.ProjectID

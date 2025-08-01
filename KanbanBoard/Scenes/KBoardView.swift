@@ -87,9 +87,10 @@ fileprivate extension KBoardView {
 fileprivate struct RowView: View {
     let kBoardID: KBoardID
     let titleElem: OrderDict<UUID,String>.Element
+    
     var body: some View {
         HStack {
-            BoardTitle(isVert: true, kBoardID: kBoardID, titleElem: titleElem)
+            BoardTitle(isCol: false, kBoardID: kBoardID, titleElem: titleElem)
             
             Spacer()
         }
@@ -106,7 +107,7 @@ fileprivate struct ColView: View {
     
     var body: some View {
         VStack {
-            BoardTitle(isVert: false, kBoardID: kBoardID, titleElem: titleElem)
+            BoardTitle(isCol: true, kBoardID: kBoardID, titleElem: titleElem)
             
             Spacer()
         }
@@ -119,13 +120,13 @@ fileprivate struct ColView: View {
 fileprivate struct BoardTitle: View {
     @ObservedObject var godModeVm = GodModeVM.shared
     
-    let isVert: Bool
+    let isCol: Bool
     let kBoardID : KBoardID
     let titleElem: OrderDict<UUID,String>.Element
     
     var body: some View {
         HStack {
-            EditableTitle(isVert: isVert, titleElem) { newTitle in
+            EditableTitle(kBoardID: kBoardID, isCol: isCol, title: titleElem) { newTitle in
                 kBoardID.document.content.columns[titleElem.key] = newTitle
             }
         }
