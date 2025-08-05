@@ -12,7 +12,7 @@ struct KBCard: Codable, Identifiable {
     var issueName: String
     var issueURL: URL?
     
-    var descr: String = ""
+    var descr: String
     
     var dateCreation: Date
     var dateEnd: Date?

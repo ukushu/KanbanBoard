@@ -80,8 +80,10 @@ fileprivate extension KBCard {
         KBCard(id: "temp",
                users: [],
                issueName: "",
+               descr: "",
                dateCreation: .now,
-               tags: "")
+               tags: ""
+        )
     }
     
     func fixId(cardID: String) -> KBCard {
@@ -89,6 +91,7 @@ fileprivate extension KBCard {
                users: self.users,
                issueName: self.issueName,
                issueURL: self.issueURL,
+               descr: self.descr,
                dateCreation: self.dateCreation,
                dateEnd: self.dateEnd,
                tags: self.tags
