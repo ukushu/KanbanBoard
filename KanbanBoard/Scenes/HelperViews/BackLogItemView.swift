@@ -12,6 +12,9 @@ struct BackLogItemView: View {
     var body: some View {
         HStack {
             Text.sfIcon("line.3.horizontal", size: 15)
+                .onDrag {
+                    NSItemProvider(object: card.id as NSString)
+                }
             
             VStack(alignment: .leading) {
                 Text(card.id)

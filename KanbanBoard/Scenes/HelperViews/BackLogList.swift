@@ -28,8 +28,13 @@ struct BackLogList: View {
                 LazyVStack {
                     ForEach(documentCardDetails.content.values) { value in
                         BackLogItemView(value)
+                            .onDrop(of: [.text], delegate: DropDelegateImpl(
+                                boardID: boardID,
+                                item: value
+                            ))
                     }
                 }
+                .animation(.bouncy, value: documentCardDetails.content.keys)
             }
         }
         .padding(6)
@@ -40,3 +45,31 @@ struct BackLogList: View {
     }
 }
 
+///
+/// Helpers
+///
+
+fileprivate struct DropDelegateImpl: DropDelegate {
+    let boardID: KBoardID
+    let item: KBCard
+    
+    func performDrop(info: DropInfo) -> Bool {
+        return true
+    }
+    
+    func dropEntered(info: DropInfo) {
+        guard let fromID = info.itemProviders(for: [.text]).first?.loadObject(ofClass: NSString.self, completionHandler: { id, _ in
+            DispatchQueue.main.async {
+                guard let fromID = id as? String,
+                      let fromIndex = boardID.documentCardDetails.content.keys.firstIndex(of: fromID),
+                      let toIndex = boardID.documentCardDetails.content.keys.firstIndex(of: item.id),
+                      fromID != item.id
+                else { return }
+                
+                withAnimation{
+                    boardID.documentCardDetails.content.swapAt(fromIndex, toIndex)
+                }
+            }
+        }) else { return }
+    }
+}
