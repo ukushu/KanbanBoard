@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D0F907B2E310769000AC5FF /* MoreSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1D0F907A2E310769000AC5FF /* MoreSwiftUI */; };
 		1D0F90802E360404000AC5FF /* EditableTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F907F2E360403000AC5FF /* EditableTitle.swift */; };
+		1DB64EF02E41F98E00258235 /* BackLogItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB64EEF2E41F98400258235 /* BackLogItemView.swift */; };
 		1DB8ED3A2E10355F006561BD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DB8ED312E10355F006561BD /* Preview Assets.xcassets */; };
 		1DB8ED3B2E10355F006561BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DB8ED352E10355F006561BD /* Assets.xcassets */; };
 		1DB8ED3C2E10355F006561BD /* KBCardID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED262E10355F006561BD /* KBCardID.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		1D0F907F2E360403000AC5FF /* EditableTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTitle.swift; sourceTree = "<group>"; };
 		1DB64EEE2E3CCB3C00258235 /* SwiftFlowTutor.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = SwiftFlowTutor.md; sourceTree = "<group>"; };
+		1DB64EEF2E41F98400258235 /* BackLogItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackLogItemView.swift; sourceTree = "<group>"; };
 		1DB8ED262E10355F006561BD /* KBCardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBCardID.swift; sourceTree = "<group>"; };
 		1DB8ED272E10355F006561BD /* KBoardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBoardID.swift; sourceTree = "<group>"; };
 		1DB8ED282E10355F006561BD /* KBUserID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBUserID.swift; sourceTree = "<group>"; };
@@ -85,9 +87,7 @@
 				1DB8ED332E10355F006561BD /* KBCardView.swift */,
 				1DB8ED2C2E10355F006561BD /* KBCell.swift */,
 				1DB8ED2F2E10355F006561BD /* KBUser.swift */,
-				1DB8ED262E10355F006561BD /* KBCardID.swift */,
 				1DB8ED282E10355F006561BD /* KBUserID.swift */,
-				1DB8ED2B2E10355F006561BD /* KBCard.swift */,
 				1DB8ED2E2E10355F006561BD /* KBoard.swift */,
 			);
 			path = Garbage;
@@ -96,8 +96,10 @@
 		1DB64EEA2E3C02D700258235 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				1DB64EF12E41FA1B00258235 /* Data */,
 				1DB64EEB2E3C02E000258235 /* Storage */,
 				1DB8ED272E10355F006561BD /* KBoardID.swift */,
+				1DB8ED262E10355F006561BD /* KBCardID.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -124,9 +126,18 @@
 		1DB64EED2E3C035A00258235 /* HelperViews */ = {
 			isa = PBXGroup;
 			children = (
+				1DB64EEF2E41F98400258235 /* BackLogItemView.swift */,
 				1D0F907F2E360403000AC5FF /* EditableTitle.swift */,
 			);
 			path = HelperViews;
+			sourceTree = "<group>";
+		};
+		1DB64EF12E41FA1B00258235 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				1DB8ED2B2E10355F006561BD /* KBCard.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		1DB8ED322E10355F006561BD /* Preview Content */ = {
@@ -254,6 +265,7 @@
 				1D0F90802E360404000AC5FF /* EditableTitle.swift in Sources */,
 				1DB8ED3D2E10355F006561BD /* KBoardID.swift in Sources */,
 				1DB8ED3E2E10355F006561BD /* KBUserID.swift in Sources */,
+				1DB64EF02E41F98E00258235 /* BackLogItemView.swift in Sources */,
 				1DB8ED3F2E10355F006561BD /* KBCard.swift in Sources */,
 				1DB8ED402E10355F006561BD /* KBCell.swift in Sources */,
 				1DB8ED492E10356E006561BD /* KBoardID.storage.swift in Sources */,

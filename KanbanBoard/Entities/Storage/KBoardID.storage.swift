@@ -21,4 +21,10 @@ extension KBoardID {
             Flow.Document(jsonURL: boardID.cardsUrl, defaultContent: [:], errors: pool)
         }
     }
+    
+    var documentCardDetails : Flow.Document<[UUID: [KBCard]]> {
+        return storage.lazyInit { boardID, pool in
+            Flow.Document(jsonURL: boardID.cardsUrl, defaultContent: [:], errors: pool)
+        }
+    }
 }

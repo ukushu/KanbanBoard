@@ -4,10 +4,10 @@ import Essentials
 
 struct KBCardID : Hashable, Codable, Identifiable {
     public var boardID: UUID
-    private(set) var id : UUID
+    private(set) var id: String
     
-    init(boardID: KBoardID, uuid: UUID = UUID()) {
+    init(boardID: KBoardID, cardId: String) {
         self.boardID = boardID.id
-        self.id = uuid
+        self.id = cardId
     }
 }
