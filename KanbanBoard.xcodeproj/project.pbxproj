@@ -10,6 +10,8 @@
 		1D0F907B2E310769000AC5FF /* MoreSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 1D0F907A2E310769000AC5FF /* MoreSwiftUI */; };
 		1D0F90802E360404000AC5FF /* EditableTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F907F2E360403000AC5FF /* EditableTitle.swift */; };
 		1DB64EF02E41F98E00258235 /* BackLogItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB64EEF2E41F98400258235 /* BackLogItemView.swift */; };
+		1DB64EF42E42106700258235 /* SheetVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB64EF32E42106300258235 /* SheetVM.swift */; };
+		1DB64EF62E4213FE00258235 /* SheetNewCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB64EF52E4213F100258235 /* SheetNewCard.swift */; };
 		1DB8ED3A2E10355F006561BD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DB8ED312E10355F006561BD /* Preview Assets.xcassets */; };
 		1DB8ED3B2E10355F006561BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DB8ED352E10355F006561BD /* Assets.xcassets */; };
 		1DB8ED3C2E10355F006561BD /* KBCardID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB8ED262E10355F006561BD /* KBCardID.swift */; };
@@ -48,6 +50,8 @@
 		1D0F907F2E360403000AC5FF /* EditableTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditableTitle.swift; sourceTree = "<group>"; };
 		1DB64EEE2E3CCB3C00258235 /* SwiftFlowTutor.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = SwiftFlowTutor.md; sourceTree = "<group>"; };
 		1DB64EEF2E41F98400258235 /* BackLogItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackLogItemView.swift; sourceTree = "<group>"; };
+		1DB64EF32E42106300258235 /* SheetVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetVM.swift; sourceTree = "<group>"; };
+		1DB64EF52E4213F100258235 /* SheetNewCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetNewCard.swift; sourceTree = "<group>"; };
 		1DB8ED262E10355F006561BD /* KBCardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBCardID.swift; sourceTree = "<group>"; };
 		1DB8ED272E10355F006561BD /* KBoardID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBoardID.swift; sourceTree = "<group>"; };
 		1DB8ED282E10355F006561BD /* KBUserID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBUserID.swift; sourceTree = "<group>"; };
@@ -140,6 +144,23 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
+		1DB64EF22E42105800258235 /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				1DB64EF72E42140700258235 /* VM */,
+				1DB64EF52E4213F100258235 /* SheetNewCard.swift */,
+			);
+			path = Sheets;
+			sourceTree = "<group>";
+		};
+		1DB64EF72E42140700258235 /* VM */ = {
+			isa = PBXGroup;
+			children = (
+				1DB64EF32E42106300258235 /* SheetVM.swift */,
+			);
+			path = VM;
+			sourceTree = "<group>";
+		};
 		1DB8ED322E10355F006561BD /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +175,7 @@
 				1DB8ED382E10355F006561BD /* KanbanBoardApp.swift */,
 				1DB64EEA2E3C02D700258235 /* Entities */,
 				1DB64EEC2E3C034200258235 /* Scenes */,
+				1DB64EF22E42105800258235 /* Sheets */,
 				1DB8ED322E10355F006561BD /* Preview Content */,
 				1DB64EE92E3BFF8300258235 /* Garbage */,
 				1DB8ED352E10355F006561BD /* Assets.xcassets */,
@@ -265,6 +287,7 @@
 				1D0F90802E360404000AC5FF /* EditableTitle.swift in Sources */,
 				1DB8ED3D2E10355F006561BD /* KBoardID.swift in Sources */,
 				1DB8ED3E2E10355F006561BD /* KBUserID.swift in Sources */,
+				1DB64EF42E42106700258235 /* SheetVM.swift in Sources */,
 				1DB64EF02E41F98E00258235 /* BackLogItemView.swift in Sources */,
 				1DB8ED3F2E10355F006561BD /* KBCard.swift in Sources */,
 				1DB8ED402E10355F006561BD /* KBCell.swift in Sources */,
@@ -275,6 +298,7 @@
 				1DB8ED442E10355F006561BD /* KBCardView.swift in Sources */,
 				1DB8ED452E10355F006561BD /* ProjView.swift in Sources */,
 				1DB8ED4B2E1035C9006561BD /* ProjID.storage.swift in Sources */,
+				1DB64EF62E4213FE00258235 /* SheetNewCard.swift in Sources */,
 				1DB8ED462E10355F006561BD /* KanbanBoardApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

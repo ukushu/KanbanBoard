@@ -10,14 +10,14 @@ class GodModeVM: ObservableObject {
 
 struct KBoardView: View {
     let kBoardID: KBoardID
-    @ObservedObject var document : Flow.Document<KBoard>
-    @ObservedObject var documentCards : Flow.Document<[String : [KBCardID]]>
+    @ObservedObject var document: Flow.Document<KBoard>
+    @ObservedObject var documentCardDetails: Flow.Document<[String : KBCard]>
     @ObservedObject var godModeVm = GodModeVM.shared
     
     init(kBoardID: KBoardID) {
         self.kBoardID = kBoardID
         self.document = kBoardID.document
-        self.documentCards = kBoardID.documentCards
+        self.documentCardDetails = kBoardID.documentCardDetails
     }
     
     var body: some View {
@@ -25,6 +25,10 @@ struct KBoardView: View {
             HStack {
                 Button("God mode") {
                     godModeVm.inEdit.toggle()
+                }
+                
+                Button("+ ticket") {
+                    SheetVM.shared.open(content: { SheetNewCard(boardID: kBoardID) } )
                 }
             }
             

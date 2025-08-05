@@ -1,10 +1,12 @@
 
 import SwiftUI
+import MoreSwiftUI
 import Essentials
 
 struct ProjView: View {
     let projID: ProjID
     @ObservedObject var boardsListDocument : Flow.Document<[UUID]>
+    @ObservedObject var sheetVM = SheetVM.shared
     
     init(projID: ProjID) {
         self.projID = projID
@@ -13,6 +15,7 @@ struct ProjView: View {
     
     var body: some View {
         KBoardView(kBoardID: projID.defaultBoardID)
+            .sheet(sheet: $sheetVM.sheet)
     }
 }
 
