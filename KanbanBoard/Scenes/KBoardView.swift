@@ -11,13 +11,11 @@ class GodModeVM: ObservableObject {
 struct KBoardView: View {
     let kBoardID: KBoardID
     @ObservedObject var document: Flow.Document<KBoard>
-    @ObservedObject var documentCardDetails: Flow.Document<[String : KBCard]>
     @ObservedObject var godModeVm = GodModeVM.shared
     
     init(kBoardID: KBoardID) {
         self.kBoardID = kBoardID
         self.document = kBoardID.document
-        self.documentCardDetails = kBoardID.documentCardDetails
     }
     
     var body: some View {
@@ -26,35 +24,35 @@ struct KBoardView: View {
                 Button("God mode") {
                     godModeVm.inEdit.toggle()
                 }
-                
-                Button("+ ticket") {
-                    SheetVM.shared.open(content: { SheetNewCard(boardID: kBoardID) } )
-                }
             }
             
             ScrollView([.horizontal, .vertical], showsIndicators: true) {
-                ZStack {
-                    VStack {
-                        Space(20)
-                        
-                        ForEach(Array(kBoardID.document.content.rows.enumerated()), id: \.element.key ) { item in
-                            RowView(kBoardID: kBoardID, titleElem: item.element)
-                        }
-                        
-                        AddRowBtn()
-                    }
-                    .animation(.default, value: kBoardID.document.content.rows)
+                HStack(alignment: .top) {
+                    BackLogList(kBoardID)
                     
-                    HStack {
-                        Space(120)
-                        
-                        ForEach(Array(kBoardID.document.content.columns.enumerated()), id: \.element.key ) { item in
-                            ColView(kBoardID: kBoardID, titleElem: item.element)
+                    ZStack {
+                        VStack {
+                            Space(20)
+                            
+                            ForEach(Array(kBoardID.document.content.rows.enumerated()), id: \.element.key ) { item in
+                                RowView(kBoardID: kBoardID, titleElem: item.element)
+                            }
+                            
+                            AddRowBtn()
                         }
+                        .animation(.default, value: kBoardID.document.content.rows)
                         
-                        AddColBtn()
+                        HStack {
+                            Space(120)
+                            
+                            ForEach(Array(kBoardID.document.content.columns.enumerated()), id: \.element.key ) { item in
+                                ColView(kBoardID: kBoardID, titleElem: item.element)
+                            }
+                            
+                            AddColBtn()
+                        }
+                        .animation(.default, value: kBoardID.document.content.columns)
                     }
-                    .animation(.default, value: kBoardID.document.content.columns)
                 }
             }
         }

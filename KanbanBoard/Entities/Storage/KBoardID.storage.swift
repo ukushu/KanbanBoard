@@ -7,7 +7,7 @@ import OrderedCollections
 extension KBoardID {
     var storage : Flow.Storage<KBoardID> { projID.storage(boardID: self) }
     
-    var updatesBoard: Flow.Signal<KBoard> { self.document.$content }
+    //var updatesBoard: Flow.Signal<KBoard> { self.document.$content }
     
     var document : Flow.Document<KBoard> {
         return storage.lazyInit { boardID, pool in
@@ -15,7 +15,7 @@ extension KBoardID {
         }
     }
     
-    var documentCardDetails : Flow.Document<[String: KBCard]> {
+    var documentCardDetails : Flow.Document<OrderDict<String, KBCard>> {
         return storage.lazyInit { boardID, pool in
             Flow.Document(jsonURL: boardID.cardsUrl, defaultContent: [:], errors: pool)
         }

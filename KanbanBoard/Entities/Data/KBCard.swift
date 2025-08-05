@@ -4,8 +4,8 @@ import Essentials
 import MoreSwiftUI
 import SwiftUI
 
-struct KBCard: Codable {
-    var cardID: KBCardID
+struct KBCard: Codable, Identifiable {
+    var id: String
     var users: [KBUser]
     
     var color: Color = Color(hex: 0xfef8ab)
